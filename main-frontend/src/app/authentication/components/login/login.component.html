@@ -1,0 +1,28 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+  Logged in as {{roles}}.
+</div>
+
+<ng-template #loggedOut>
+  <div class="container">
+    <mat-card class="card-wrapper">
+      <mat-card-title class="form-title">Login Form</mat-card-title>
+      <form [formGroup]="loginForm" (ngSubmit)="clickLogin()" autocomplete="off">
+        <mat-form-field class="field-wrapper">
+          <mat-label>Username:</mat-label>
+          <input matInput type="text" formControlName="username" />
+          <mat-error *ngIf="loginForm.get('username')">Invalid username</mat-error>
+        </mat-form-field>
+        <mat-form-field class="field-wrapper">
+          <mat-label>Password:</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error *ngIf="loginForm.get('password')">Invalid password</mat-error>
+        </mat-form-field>
+        <div class="buttons-group">
+          <button mat-raised-button type="submit" color="primary" class="sub-button"
+            [disabled]="!loginForm.valid">Login</button>
+            <button mat-raised-button type="button" (click)="clickRegister()">Register</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</ng-template>

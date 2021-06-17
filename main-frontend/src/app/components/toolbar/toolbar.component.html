@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button routerLink=""><mat-icon>menu</mat-icon></button>
+  <button style="font-size: 1.1rem;" mat-button routerLink="">My Portfolio</button>
+  <button mat-button routerLink="home">Home</button>
+  <button *ngIf="authority === 'admin'" mat-button routerLink="admin">Admin</button>
+  <button *ngIf="authority === 'mod'" mat-button routerLink="mod">Moderator</button>
+  <button *ngIf="authority === 'user'" mat-button routerLink="user">User</button>
+  <span style="flex-grow: 1;"></span>
+  <span *ngIf="!authority; else logout;">
+    <button mat-icon-button (click)="login()"><mat-icon>login</mat-icon></button>
+  </span>
+  <ng-template #logout>
+    <span class="user-label">{{ username }}</span>
+    <button mat-icon-button (click)="exit()"><mat-icon>logout</mat-icon></button>
+  </ng-template>
+  <button mat-icon-button (click)="register()"><mat-icon>person_add</mat-icon></button>
+</mat-toolbar>
