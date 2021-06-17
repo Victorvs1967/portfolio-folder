@@ -13,35 +13,57 @@ import com.vvs.mainbackend.model.User;
 import com.vvs.mainbackend.repository.RoleRepository;
 import com.vvs.mainbackend.repository.UserRepository;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ChangeLog
 public class DbChangeLog {
 
+  @Value("${app.admin.username}")
+  private String username;
+
+  @Value("${app.admin.email}")
+  private String email;
+
+  @Value("${app.admin.password}")
+  private String password;
+
   private PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-  };
+  }
   
   @ChangeSet(order = "001", id = "mainDB", author= "Me")
   public void mainDB(RoleRepository roleRepository, UserRepository userRepository) {
+
     List<Role> roles = new ArrayList<>();
     roles.add(addRole(EnRole.ROLE_ADMIN));
     roles.add(addRole(EnRole.ROLE_MODERATOR));
     roles.add(addRole(EnRole.ROLE_USER));
     roleRepository.insert(roles);
 
-    User admin = new User("admin", passwordEncoder().encode("admin"), "admin@mail.me");
     Set<Role> adminRoles = new HashSet<>();
-    Role adminRole = roleRepository.findByName(EnRole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("ERROR: Role USER is not found"));
+    Role adminRole = roleRepository.findByName(EnRole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("ERROR: Role ADMIN is not found"));
     adminRoles.add(adminRole);
-    admin.setRoles(adminRoles);
+
+    User admin = addAdmin(adminRoles);
     userRepository.insert(admin);
   }
+
   private Role addRole(EnRole roleName) {
     Role role = new Role();
     role.setName(roleName);
     return role;
+  }
+
+  private User addAdmin(Set<Role> roleNames) {
+    String adminName = username;
+    String adminPassword = password;
+    String adminEmail = email;
+    String pass = passwordEncoder().encode(adminPassword);
+    User user = new User(adminName, pass, adminEmail);
+    user.setRoles(roleNames);
+    return user;
   }
 
 }
