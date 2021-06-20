@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from 'src/app/modules/material/material.module';
+import { MaterialModule } from 'src/app/modules/material.module';
 import { LoginComponent } from '../../components/login/login.component';
 import { LogoutComponent } from '../../components/logout/logout.component';
 import { RegisterComponent } from '../../components/register/register.component';

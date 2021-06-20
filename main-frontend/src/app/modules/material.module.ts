@@ -7,6 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 const materialModules = [
   MatToolbarModule,
@@ -16,7 +20,11 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatTableModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSidenavModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatListModule,
 ]
 
 @NgModule({
