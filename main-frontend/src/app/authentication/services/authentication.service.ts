@@ -30,6 +30,7 @@ export class AuthenticationService {
   }
 
   signUp(info: SignupInfo): Observable<string> {
+    console.log(info);
     return this.http.post<string>(this.config.authEndpoint + '/signup', info, httpOptions);
   }
 

@@ -10,8 +10,12 @@ import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ModComponent } from './components/mod/mod.component';
 import { AuthenticationModule } from './authentication/modules/authentication/authentication.module';
+import { UsersTableComponent } from './components/users-table/users-table.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
-export const AUTHENTICATION_CONFIG = { authEndpoint: 'http://localhost:8080/api/auth', initialPage: 'home' };
+export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initialPage: 'home' };
 
 @NgModule({
   declarations: [
@@ -19,10 +23,14 @@ export const AUTHENTICATION_CONFIG = { authEndpoint: 'http://localhost:8080/api/
     ToolbarComponent,
     UserComponent,
     AdminComponent,
-    ModComponent
+    ModComponent,
+    UsersTableComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

@@ -17,23 +17,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import lombok.extern.java.Log;
+
+@Log
 @ChangeLog
 public class DbChangeLog {
-
-  @Value("${app.admin.username}")
-  private String username;
-
-  @Value("${app.admin.email}")
-  private String email;
-
-  @Value("${app.admin.password}")
-  private String password;
 
   private PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
   
-  @ChangeSet(order = "001", id = "mainDB", author= "Me")
+  @ChangeSet(order = "001", id = "mainDB", author= "vvs")
   public void mainDB(RoleRepository roleRepository, UserRepository userRepository) {
 
     List<Role> roles = new ArrayList<>();
@@ -57,11 +51,9 @@ public class DbChangeLog {
   }
 
   private User addAdmin(Set<Role> roleNames) {
-    String adminName = username;
-    String adminPassword = password;
-    String adminEmail = email;
-    String pass = passwordEncoder().encode(adminPassword);
-    User user = new User(adminName, pass, adminEmail);
+    String pass = passwordEncoder().encode("admin");
+    User user = new User("admin", pass, "admin@mail.me");
+    user.setFullname("Admin");
     user.setRoles(roleNames);
     return user;
   }

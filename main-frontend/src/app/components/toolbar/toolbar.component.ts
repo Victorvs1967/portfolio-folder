@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PassDataService } from 'src/app/authentication/services/pass-data.service';
 import { TokenStorageService } from 'src/app/authentication/services/token-storage.service';

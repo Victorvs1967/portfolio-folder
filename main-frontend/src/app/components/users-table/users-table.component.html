@@ -1,0 +1,39 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2" aria-hidden="true">
+
+  <ng-container [matColumnDef]="col"  *ngFor="let col of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef scope="col"><span *ngIf="col !== 'buttons'">{{ col }}</span></th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="!element.isEdit; else editForm">
+        <span *ngIf="col !== 'roles' && col !== 'buttons'">{{ element[col] }}</span>
+        <span *ngIf="col === 'roles'">
+          <div *ngFor="let role of element[col]">{{ role.name }}</div>
+        </span>
+        <button *ngIf="col === 'buttons'" mat-icon-button color="primary" (click)="element.isEdit = !element.isEdit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element.username)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+      <ng-template #editForm>
+        <span *ngIf="col === 'username'">{{ element[col] }}</span>
+        <mat-form-field *ngIf="col === 'roles'">
+          <mat-label>Choose roles</mat-label>
+          <mat-select [formControl]="selectedRoles" multiple>
+            <mat-option *ngFor="let role of roles" [value]="role.name">{{ role.viewName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="col !== 'buttons' && col != 'roles' && col !== 'username'">
+          <mat-label>{{ col }}</mat-label>
+          <input matInput type="text" [(ngModel)]="element[col]" [name]="element[col]">
+        </mat-form-field>
+        <button *ngIf="col === 'buttons'" mat-icon-button color="primary" type="submit" (click)=" save(element); element.isEdit = !element.isEdit">
+          <mat-icon>done</mat-icon>
+        </button>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

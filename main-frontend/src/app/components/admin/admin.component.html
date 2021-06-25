@@ -1,1 +1,5 @@
-<div [innerHtml]="boardMessage"></div>
+<div class="admin-title">
+  <h1>Admin Dashboard</h1>
+  <mat-divider></mat-divider>
+</div>
+<app-users-table [dataSource]="boardMessage"></app-users-table>

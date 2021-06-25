@@ -6,12 +6,14 @@ import { RegisterComponent } from './authentication/components/register/register
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModComponent } from './components/mod/mod.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "user", component: UserComponent },
   { path: "admin", component: AdminComponent },
+  { path: "edit/:username", component: UserFormComponent },
   { path: "mod", component: ModComponent },
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { BoardsService } from 'src/app/services/boards.service';
 
 @Component({
@@ -8,15 +9,16 @@ import { BoardsService } from 'src/app/services/boards.service';
 })
 export class AdminComponent implements OnInit {
 
-
-  boardMessage?: string;
+  boardMessage: User[] = [];
   errorMessage?: string;
 
   constructor(private boardsService: BoardsService) { }
 
   ngOnInit(): void {
-    this.boardsService.getAdminBowrd()
-      .subscribe(data => this.boardMessage = data,
+    this.boardsService.getAdminBoard()
+      .subscribe(data => {
+        this.boardMessage = data;
+      },
         error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);
   }
 
