@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   authority?: string;
 
   registerForm: FormGroup = this.formBuilder.group({
-    name: [null, { validators: [Validators.required], updateOn: "change" }],
+    name: [null, { validators: [Validators.nullValidator], updateOn: "change" }],
     username: [null, { validators: [Validators.required], updateOn: "change" }],
     email: [null, { validators: [Validators.required, Validators.email], updateOn: "change" }],
     password: [null, { validators: [Validators.required], updateOn: "change" }],

@@ -1,22 +1,9 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
   <button style="font-size: 1.1rem;" mat-button routerLink="">My Portfolio</button>
-<!--  <button mat-button routerLink="home">Home</button>
-  <button *ngIf="authority === 'admin'" mat-button routerLink="admin">Admin</button>
-  <button *ngIf="authority === 'mod'" mat-button routerLink="mod">Moderator</button>
-  <button *ngIf="authority === 'user'" mat-button routerLink="user">User</button>
-  <span style="flex-grow: 1;"></span>
-  <span *ngIf="!authority; else logout;">
-    <button mat-icon-button (click)="login()"><mat-icon>login</mat-icon></button>
-  </span>
-  <ng-template #logout>
-    <span class="user-label">{{ username }}</span>
-    <button mat-icon-button (click)="exit()"><mat-icon>logout</mat-icon></button>
-  </ng-template>
-  <button mat-icon-button (click)="register()"><mat-icon>person_add</mat-icon></button> -->
 </mat-toolbar>
 <mat-drawer-container class="sidenav-container" autosize>
-  <mat-drawer #sidenav mode="side" closed class="sidenav">
+  <mat-drawer #sidenav mode="over" closed class="sidenav">
     <div class="search-list-container">
       <mat-form-field class="search-input">
         <mat-label>Search</mat-label>
@@ -24,26 +11,26 @@
       </mat-form-field>
       <div class="search-list">
         <mat-list #cityList>
-          <mat-list-item><button mat-button routerLink="home">Home</button></mat-list-item>
-          <mat-list-item *ngIf="authority === 'admin'"><button mat-button routerLink="admin">Admin</button></mat-list-item>
-          <mat-list-item *ngIf="authority === 'mod'"><button mat-button routerLink="mod">Moderator</button></mat-list-item>
-          <mat-list-item *ngIf="authority === 'user'"><button mat-button routerLink="user">User</button></mat-list-item>
+          <mat-list-item><button mat-button routerLink="home" (click)="sidenav.close()">Home</button></mat-list-item>
+          <mat-list-item *ngIf="authority === 'admin'"><button mat-button routerLink="admin" (click)="sidenav.close()">Admin</button></mat-list-item>
+          <mat-list-item *ngIf="authority === 'mod'"><button mat-button routerLink="mod" (click)="sidenav.close()">Moderator</button></mat-list-item>
+          <mat-list-item *ngIf="authority === 'user'"><button mat-button routerLink="user" (click)="sidenav.close()">User</button></mat-list-item>
           <hr>
           <div style="margin-top: 50vh;"></div>
           <mat-list-item *ngIf="!authority; else out;">
             <button mat-button (click)="login()">Login</button>
-            <button mat-icon-button style="margin-left: auto;" (click)="login()"><mat-icon>login</mat-icon></button>
+            <button mat-icon-button style="margin-left: auto;" (click)="login(); sidenav.close();"><mat-icon>login</mat-icon></button>
           </mat-list-item>
           <ng-template #out>
             <mat-list-item>
               <button mat-button (click)="exit()">Logout</button>
               <span><small>{{ username }}</small></span>
-            <button mat-icon-button style="margin-left: auto;" (click)="exit()"><mat-icon>logout</mat-icon></button>
+            <button mat-icon-button style="margin-left: auto;" (click)="exit(); sidenav.close();"><mat-icon>logout</mat-icon></button>
             </mat-list-item>
           </ng-template>
           <mat-list-item>
             <button mat-button (click)="register()">Register</button>
-            <button mat-icon-button style="margin-left: auto;" (click)="register()"><mat-icon>person_add</mat-icon></button>
+            <button mat-icon-button style="margin-left: auto;" (click)="register(); sidenav.close();"><mat-icon>person_add</mat-icon></button>
           </mat-list-item>
         </mat-list>
       </div>
