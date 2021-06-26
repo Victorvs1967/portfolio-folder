@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     username: [null, { validators: [Validators.required], updateOn: "change" }],
     email: [null, { validators: [Validators.required, Validators.email], updateOn: "change" }],
     password: [null, { validators: [Validators.required], updateOn: "change" }],
-    role: [['user'], { validators: [Validators.required], updateOn: "change" }]
+    role: ['user', { validators: [Validators.required], updateOn: "change" }]
   })
 
   constructor(
@@ -52,7 +52,6 @@ export class RegisterComponent implements OnInit {
     let inRole = this.registerForm.controls.role.value;
     if (inRole) this.signUpInfo.roles.push(inRole);
 
-    console.log(this.signUpInfo);
     this.authenticationService.signUp(this.signUpInfo).subscribe(data => {
       this.isSignedUp = true;
       this.isSignedUpFailed = false;
