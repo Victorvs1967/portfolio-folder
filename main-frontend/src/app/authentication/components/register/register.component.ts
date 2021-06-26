@@ -1,3 +1,4 @@
+import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +24,7 @@ export class RegisterComponent implements OnInit {
     username: [null, { validators: [Validators.required], updateOn: "change" }],
     email: [null, { validators: [Validators.required, Validators.email], updateOn: "change" }],
     password: [null, { validators: [Validators.required], updateOn: "change" }],
-    role: ['user', { validators: [Validators.required], updateOn: "change" }]
+    role: [['user'], { validators: [Validators.required], updateOn: "change" }]
   })
 
   constructor(

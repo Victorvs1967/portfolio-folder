@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/models/role';
@@ -42,12 +42,11 @@ export class UsersTableComponent implements OnInit {
       user.email,
       user.password
     );
-    let newRoles = this.selectedRoles.value;
+
+    let newRoles = this.selectedRoles.value ? this.selectedRoles.value : ['user'];
 
     if (!newRoles) newRoles = user.roles;
-    console.log(newRoles);
     for (let role of newRoles) this.newUser.roles.push(role);
-    console.log(this.newUser);
     this.boardsService.update(this.newUser).subscribe(() => this.reloadPage());
   }
 
