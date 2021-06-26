@@ -21,6 +21,8 @@ export class UsersTableComponent implements OnInit {
     { name: 'user', viewName: 'ROLE_USER'}
   ];
 
+  errorMessage?: string;
+
   selectedRoles = new FormControl();
   newUser?: User;
 
@@ -31,7 +33,7 @@ export class UsersTableComponent implements OnInit {
   }
 
   delete(user: string) {
-    this.boardsService.delete(user).subscribe(() => this.reloadPage());
+    this.boardsService.delete(user).subscribe(() => this.reloadPage(), error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);
   }
 
   save(user: User) {
@@ -47,7 +49,7 @@ export class UsersTableComponent implements OnInit {
 
     if (!newRoles) newRoles = user.roles;
     for (let role of newRoles) this.newUser.roles.push(role);
-    this.boardsService.update(this.newUser).subscribe(() => this.reloadPage());
+    this.boardsService.update(this.newUser).subscribe(() => this.reloadPage(), error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);
   }
 
   reloadPage() {

@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TokenStorageService } from "../services/token-storage.service";
-import { ErrorInterceptor } from "./error.interceptor";
+// import { ErrorInterceptor } from "./error.interceptor";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -23,5 +23,5 @@ export class TokenInterceptor implements HttpInterceptor {
 
 export const AUTH_INTERCEPTOR_PROVIDER = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 ];

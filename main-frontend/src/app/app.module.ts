@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +13,9 @@ import { ModComponent } from './components/mod/mod.component';
 import { AuthenticationModule } from './authentication/modules/authentication/authentication.module';
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initialPage: 'home' };
 
@@ -25,7 +27,9 @@ export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initia
     AdminComponent,
     ModComponent,
     UsersTableComponent,
-    UserFormComponent
+    UserFormComponent,
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
