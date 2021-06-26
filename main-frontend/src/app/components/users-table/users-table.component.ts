@@ -44,8 +44,10 @@ export class UsersTableComponent implements OnInit {
     );
     let newRoles = this.selectedRoles.value;
 
-    if (!newRoles) newRoles = ['user'];
-    for (let role of newRoles) if (role !== 'user') this.newUser.roles.push(role);
+    if (!newRoles) newRoles = user.roles;
+    console.log(newRoles);
+    for (let role of newRoles) this.newUser.roles.push(role);
+    console.log(this.newUser);
     this.boardsService.update(this.newUser).subscribe(() => this.reloadPage());
   }
 

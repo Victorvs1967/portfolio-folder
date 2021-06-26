@@ -62,6 +62,9 @@ export class LoginComponent implements OnInit {
   clickRegister() {
     this.router.navigate(['register']);
   }
+  cancel() {
+    this.router.navigate(['']);
+  }
 
   reloadPage() {
     window.location.reload();

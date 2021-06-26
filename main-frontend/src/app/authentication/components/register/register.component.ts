@@ -26,7 +26,8 @@ export class RegisterComponent implements OnInit {
     role: ['user', { validators: [Validators.required], updateOn: "change" }]
   })
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private tokenStorage: TokenStorageService,
     private router: Router) { 
@@ -59,6 +60,10 @@ export class RegisterComponent implements OnInit {
       this.errorMessage = error.error.message;
       this.isSignedUpFailed = true;
     });
+  }
+
+  cancel() {
+    this.router.navigate(['']);
   }
 
 }
