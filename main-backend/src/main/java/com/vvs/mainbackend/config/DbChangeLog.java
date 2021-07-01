@@ -13,13 +13,9 @@ import com.vvs.mainbackend.model.User;
 import com.vvs.mainbackend.repository.RoleRepository;
 import com.vvs.mainbackend.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import lombok.extern.java.Log;
-
-@Log
 @ChangeLog
 public class DbChangeLog {
 
