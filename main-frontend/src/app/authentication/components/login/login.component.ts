@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalService, ModalState } from 'src/app/services/modal.service';
 import { LoginInfo } from '../../models/login-info';
 import { AuthenticationService } from '../../services/authentication.service';
 import { TokenStorageService } from '../../services/token-storage.service';
@@ -17,16 +18,20 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
   roles: string[];
   private loginInfo?: LoginInfo;
+  public display: ModalState;
+
 
   constructor(private formBuilder: FormBuilder, 
               private router: Router, 
               private authenticationService: AuthenticationService,
-              private tokenStorage: TokenStorageService) { 
+              private tokenStorage: TokenStorageService,
+              private modalService: ModalService) { 
 
     this.isLoggedIn = false;
     this.isLogingFailed = false;
     this.errorMessage = '';
     this.roles = [];
+    this.display = 'open';
   }
 
   loginForm: FormGroup = this.formBuilder.group({
@@ -35,6 +40,7 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.display = 'open';
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
@@ -56,18 +62,23 @@ export class LoginComponent implements OnInit {
       this.errorMessage = error.error.message;
       this.isLogingFailed = true;
     });
+    this.close();
     this.router.navigate(['home']);
   }
 
   clickRegister() {
+    this.close();
     this.router.navigate(['register']);
   }
-  cancel() {
-    this.router.navigate(['']);
-  }
-
   reloadPage() {
     window.location.reload();
+  }
+
+  close() {
+    this.display = 'close';
+    this.loginForm.reset();
+    this.modalService.close();
+    this.router.navigate(['']);
   }
 
 }

@@ -1,7 +1,7 @@
-import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalService, ModalState } from 'src/app/services/modal.service';
 import { SignupInfo } from '../../models/signup-info';
 import { AuthenticationService } from '../../services/authentication.service';
 import { TokenStorageService } from '../../services/token-storage.service';
@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   isSignedUpFailed: boolean;
   errorMessage: string;
   authority?: string;
+  public display: ModalState;
 
   registerForm: FormGroup = this.formBuilder.group({
     name: [null, { validators: [Validators.nullValidator], updateOn: "change" }],
@@ -31,10 +32,12 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private tokenStorage: TokenStorageService,
-    private router: Router) { 
+    private router: Router,
+    private modalService: ModalService) { 
     this.isSignedUp = false;
     this.isSignedUpFailed = false;
     this.errorMessage = '';
+    this.display = 'open';
   }
 
   ngOnInit(): void {
@@ -60,10 +63,13 @@ export class RegisterComponent implements OnInit {
       this.errorMessage = error.error.message;
       this.isSignedUpFailed = true;
     });
+    this.close();
   }
 
-  cancel() {
+  close() {
+    this.display = 'close';
+    this.registerForm.reset();
+    this.modalService.close();
     this.router.navigate(['']);
   }
-
 }
