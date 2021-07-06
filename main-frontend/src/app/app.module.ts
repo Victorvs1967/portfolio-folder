@@ -16,6 +16,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { environment } from 'src/environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initialPage: 'home' };
 
@@ -41,6 +42,7 @@ export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initia
     AuthenticationModule.forRoot(AUTHENTICATION_CONFIG)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

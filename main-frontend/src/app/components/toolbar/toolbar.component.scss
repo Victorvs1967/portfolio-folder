@@ -1,3 +1,9 @@
+.header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
 .user-label {
   font-size: .9rem;
   font-weight: 200;
@@ -6,8 +12,9 @@
   height: 100vh;
 }
 .sidenav {
+  position: fixed;
+  top: 55px;
   width: 250px;
-  background-color: #f0f0ff;
 }
 .main-content {
   padding: 0 40px;
