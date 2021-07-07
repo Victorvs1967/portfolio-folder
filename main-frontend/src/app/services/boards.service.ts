@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenStorageService } from '../authentication/services/token-storage.service';
 import { Post } from '../models/post';
+import { PostDto } from '../models/postDto';
 import { User } from '../models/user';
 
 @Injectable({
@@ -39,6 +40,22 @@ export class BoardsService {
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(environment.postUrl + 'all');
+  }
+
+  getPost(id: string): Observable<Post> {
+    return this.http.get<Post>(environment.postUrl + id);
+  }
+
+  createPost(post: PostDto): Observable<Post> {
+    return this.http.post<Post>(environment.postUrl, post);
+  }
+
+  updatePost(id: string, post: PostDto): Observable<Post> {
+    return this.http.put<Post>(environment.postUrl + id, post);
+  }
+
+  deletePost(id: string): Observable<Post> {
+    return this.http.delete<Post>(environment.postUrl + id);
   }
 
 }

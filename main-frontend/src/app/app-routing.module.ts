@@ -4,6 +4,7 @@ import { LoginComponent } from './authentication/components/login/login.componen
 import { LogoutComponent } from './authentication/components/logout/logout.component';
 import { RegisterComponent } from './authentication/components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModComponent } from './components/mod/mod.component';
 import { PostsComponent } from './components/posts/posts.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
   { path: "register", component: RegisterComponent },
-  { path: "post", component: PostsComponent },
+  { path: "posts", component: PostsComponent },
+  { path: "post", component: CreatePostComponent },
   { path: "", redirectTo: "home", pathMatch: "full" },
 ];
 

@@ -1,10 +1,10 @@
 export class Post {
 
-  private title: string;
-  private content: string;
-  private username: string;
-  private createOn: string;
-  private updateOn: string;
+  title: string;
+  content: string;
+  username: string;
+  createOn: string;
+  updateOn: string;
 
   constructor(title: string, content: string, username: string, createOn: string, updateOn: string) {
     this.title = title;

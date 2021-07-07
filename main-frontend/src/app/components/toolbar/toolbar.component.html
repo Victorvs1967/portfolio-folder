@@ -15,7 +15,10 @@
             <button class="btn-btn" mat-button routerLink="home" (click)="sidenav.close()">Home</button>
           </mat-list-item>
           <mat-list-item *ngIf="authority">
-            <button class="btn-btn" mat-button routerLink="post" (click)="sidenav.close()">Posts</button>
+            <button class="btn-btn" mat-button routerLink="posts" (click)="sidenav.close()">Posts</button>
+          </mat-list-item>
+          <mat-list-item *ngIf="authority">
+            <button class="btn-btn" mat-button routerLink="post" (click)="sidenav.close()">Create post</button>
           </mat-list-item>
           <mat-list-item *ngIf="authority === 'admin'">
             <button class="btn-btn" mat-button routerLink="admin" (click)="sidenav.close()">Admin</button>
