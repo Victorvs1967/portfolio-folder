@@ -29,8 +29,7 @@
           <mat-list-item *ngIf="authority === 'user'">
             <button class="btn-btn" mat-button routerLink="user" (click)="sidenav.close()">User</button>
           </mat-list-item>
-          <hr>
-          <div style="margin-top: 50vh;"></div>
+          <hr style="margin-bottom: 50px;">
           <mat-list-item *ngIf="!authority; else out;">
             <button class="btn-btn" mat-button (click)="login(); sidenav.close();">
               <span class="btn-label">Login<mat-icon>login</mat-icon></span>
