@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vvs.mainbackend.exception.PostNotFoundException;
 import com.vvs.mainbackend.model.Post;
+import com.vvs.mainbackend.model.User;
 import com.vvs.mainbackend.pojo.PostDto;
 import com.vvs.mainbackend.repository.PostRepository;
 
@@ -47,9 +48,10 @@ public class PostService {
     post.setId(postDto.getId());
     post.setTitle(postDto.getTitle());
     post.setContent(postDto.getContent());
-    org.springframework.security.core.userdetails.User loggedInUser = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("User not found"));
+    // org.springframework.security.core.userdetails.User loggedInUser = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("User not found"));
     post.setCreateOn(Instant.now());
-    post.setUsername(loggedInUser.getUsername());
+    post.setUsername(postDto.getUsername());
+    // post.setUsername(loggedInUser.getUsername());
     post.setUpdateOn(Instant.now());
     return post;
   }
