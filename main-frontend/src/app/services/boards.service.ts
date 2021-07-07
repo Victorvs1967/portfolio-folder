@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenStorageService } from '../authentication/services/token-storage.service';
+import { Post } from '../models/post';
 import { User } from '../models/user';
 
 @Injectable({
@@ -25,15 +26,19 @@ export class BoardsService {
   }
 
   getAdminBoard(): Observable<User[]> {
-    return this.http.get<User[]>(environment.mainUrl + 'users');
+    return this.http.get<User[]>(environment.userUrl);
   }
 
   delete(username: string): Observable<User> {
-    return this.http.delete<User>(environment.mainUrl + username);
+    return this.http.delete<User>(environment.userUrl + username);
   }
 
   update(user: User): Observable<User> {
-    return this.http.put<User>(environment.mainUrl + user.username, user);
+    return this.http.put<User>(environment.userUrl + user.username, user);
+  }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(environment.postUrl + 'all');
   }
 
 }

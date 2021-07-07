@@ -39,7 +39,7 @@ public class UserController {
   @Autowired
   private RoleRepository roleRepository;
   
-  @GetMapping("/users")
+  @GetMapping
   @PreAuthorize("hasRole('ADMIN')")
   public List<User> getAllUsers() {
     return userRepository.findAll();

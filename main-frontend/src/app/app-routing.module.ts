@@ -6,6 +6,7 @@ import { RegisterComponent } from './authentication/components/register/register
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModComponent } from './components/mod/mod.component';
+import { PostsComponent } from './components/posts/posts.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserComponent } from './components/user/user.component';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
   { path: "register", component: RegisterComponent },
+  { path: "post", component: PostsComponent },
   { path: "", redirectTo: "home", pathMatch: "full" },
 ];
 

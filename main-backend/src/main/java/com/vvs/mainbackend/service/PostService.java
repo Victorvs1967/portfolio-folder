@@ -62,6 +62,8 @@ public class PostService {
     postDto.setTitle(post.getTitle());
     postDto.setContent(post.getContent());
     postDto.setUsername(post.getUsername());
+    postDto.setCreateOn(post.getCreateOn());
+    postDto.setUpdateOn(post.getUpdateOn());
     return postDto;
   }
 }

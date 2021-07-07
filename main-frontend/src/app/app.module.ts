@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PostsComponent } from './components/posts/posts.component';
 
 export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initialPage: 'home' };
 
@@ -30,7 +31,8 @@ export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initia
     UsersTableComponent,
     UserFormComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,

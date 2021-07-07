@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  postUrl: 'http://localhost:8080/api/posts/',
+  userUrl: 'http://localhost:8080/api/users/',
   mainUrl: 'http://localhost:8080/api/main/',
   authUrl: 'http://localhost:8080/api/auth'
 };
