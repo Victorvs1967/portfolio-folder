@@ -2,6 +2,7 @@ package com.vvs.mainbackend.controller;
 
 import java.util.List;
 
+import com.vvs.mainbackend.model.Post;
 import com.vvs.mainbackend.pojo.PostDto;
 import com.vvs.mainbackend.service.PostService;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +39,14 @@ public class PostController {
   }
 
   @GetMapping("/get/{id}")
-  public ResponseEntity<PostDto> getSinglPost(@PathVariable @RequestBody ObjectId id) {
+  public ResponseEntity<PostDto> getSinglPost(@PathVariable ObjectId id, @RequestBody PostDto postDto) {
     return new ResponseEntity<>(postService.readSinglPost(id), HttpStatus.OK);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<?> editPost(@PathVariable ObjectId id, @RequestBody PostDto postDto) {
+    postService.updatePost(postDto);
+    return ResponseEntity.ok(HttpStatus.OK);
   }
 
 }

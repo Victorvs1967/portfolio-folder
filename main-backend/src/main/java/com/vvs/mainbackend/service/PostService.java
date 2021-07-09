@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.vvs.mainbackend.exception.PostNotFoundException;
 import com.vvs.mainbackend.model.Post;
-import com.vvs.mainbackend.model.User;
 import com.vvs.mainbackend.pojo.PostDto;
 import com.vvs.mainbackend.repository.PostRepository;
 
@@ -19,9 +18,6 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class PostService {
   
-  @Autowired
-  private AuthService authService;
-
   @Autowired
   private PostRepository postRepository;
 
@@ -39,8 +35,20 @@ public class PostService {
 
   @Transactional
   public PostDto readSinglPost(ObjectId id) {
-    Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found for id: " + id));
+    Post post = postRepository.findById(id)
+        .orElseThrow(() -> new PostNotFoundException("Post not found for id: " + id));
     return mapFromPostToDto(post);
+  }
+
+  @Transactional
+  public void updatePost(PostDto postDto) {
+    Post post = postRepository.findById(postDto.getId()).orElseThrow(() -> new PostNotFoundException("Post not found."));
+    post.setTitle(postDto.getTitle());
+    post.setContent(postDto.getContent());
+    post.setUsername(postDto.getUsername());
+    post.setCreateOn(postDto.getCreateOn());
+    post.setUpdateOn(Instant.now());
+    postRepository.save(post);
   }
 
   private Post mapFromDtoToPost(PostDto postDto) {
@@ -48,10 +56,8 @@ public class PostService {
     post.setId(postDto.getId());
     post.setTitle(postDto.getTitle());
     post.setContent(postDto.getContent());
-    // org.springframework.security.core.userdetails.User loggedInUser = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("User not found"));
-    post.setCreateOn(Instant.now());
     post.setUsername(postDto.getUsername());
-    // post.setUsername(loggedInUser.getUsername());
+    post.setCreateOn(Instant.now());
     post.setUpdateOn(Instant.now());
     return post;
   }
