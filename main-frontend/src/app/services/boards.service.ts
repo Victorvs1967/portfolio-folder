@@ -43,7 +43,7 @@ export class BoardsService {
   }
 
   getPost(id: string): Observable<Post> {
-    return this.http.get<Post>(environment.postUrl + id);
+    return this.http.get<Post>(environment.postUrl + 'get/' + id);
   }
 
   createPost(post: PostDto): Observable<Post> {

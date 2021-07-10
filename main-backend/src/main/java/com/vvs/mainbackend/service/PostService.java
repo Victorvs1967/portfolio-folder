@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.java.Log;
+
 import static java.util.stream.Collectors.toList;
 
+@Log
 @Service
 public class PostService {
   
@@ -46,7 +49,7 @@ public class PostService {
     post.setTitle(postDto.getTitle());
     post.setContent(postDto.getContent());
     post.setUsername(postDto.getUsername());
-    post.setCreateOn(postDto.getCreateOn());
+    post.setCreateOn(post.getCreateOn());
     post.setUpdateOn(Instant.now());
     postRepository.save(post);
   }
@@ -65,6 +68,7 @@ public class PostService {
   private PostDto mapFromPostToDto(Post post) {
     PostDto postDto = new PostDto();
     postDto.setId(post.getId());
+    postDto.set_id(post.getId().toHexString());
     postDto.setTitle(post.getTitle());
     postDto.setContent(post.getContent());
     postDto.setUsername(post.getUsername());

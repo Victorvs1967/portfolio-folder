@@ -2,7 +2,6 @@ package com.vvs.mainbackend.controller;
 
 import java.util.List;
 
-import com.vvs.mainbackend.model.Post;
 import com.vvs.mainbackend.pojo.PostDto;
 import com.vvs.mainbackend.service.PostService;
 

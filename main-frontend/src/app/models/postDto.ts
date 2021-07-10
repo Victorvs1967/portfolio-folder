@@ -1,5 +1,6 @@
 export class PostDto {
 
+  _id?: string;
   title: string;
   content: string;
   username: string;

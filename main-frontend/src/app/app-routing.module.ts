@@ -8,6 +8,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import { HomeComponent } from './components/home/home.component';
 import { ModComponent } from './components/mod/mod.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { UpdatePostComponent } from './components/update-post/update-post.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserComponent } from './components/user/user.component';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "posts", component: PostsComponent },
   { path: "post", component: CreatePostComponent },
+  { path: "post/:id", component: UpdatePostComponent },
   { path: "", redirectTo: "home", pathMatch: "full" },
 ];
 

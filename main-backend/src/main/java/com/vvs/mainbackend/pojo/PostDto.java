@@ -15,4 +15,6 @@ public class PostDto {
   private String username;
   private Instant createOn;
   private Instant updateOn;
+  private String _id = id.toHexString();
+  
 }
