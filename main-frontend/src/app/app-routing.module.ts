@@ -11,6 +11,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { UpdatePostComponent } from './components/update-post/update-post.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserComponent } from './components/user/user.component';
+import { ViewPostComponent } from './components/view-post/view-post.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: "posts", component: PostsComponent },
   { path: "post", component: CreatePostComponent },
   { path: "post/:id", component: UpdatePostComponent },
+  { path: "view/:id", component: ViewPostComponent },
   { path: "", redirectTo: "home", pathMatch: "full" },
 ];
 

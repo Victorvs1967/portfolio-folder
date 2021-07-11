@@ -50,8 +50,8 @@ export class BoardsService {
     return this.http.post<Post>(environment.postUrl, post);
   }
 
-  updatePost(id: string, post: PostDto): Observable<Post> {
-    return this.http.put<Post>(environment.postUrl + id, post);
+  updatePost(post: PostDto): Observable<Post> {
+    return this.http.put<Post>(environment.postUrl, post);
   }
 
   deletePost(id: string): Observable<Post> {

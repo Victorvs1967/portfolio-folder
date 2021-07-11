@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
+import { PostDto } from 'src/app/models/postDto';
 import { BoardsService } from 'src/app/services/boards.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { BoardsService } from 'src/app/services/boards.service';
 export class PostsComponent implements OnInit {
 
   dataSource: Post[] = [];
-  displayedColumns = ['_id', 'title', 'content', 'username', 'createOn', 'updateOn', 'button'];
+  displayedColumns = ['title', 'content', 'username', 'createOn', 'updateOn', 'buttons'];
   errorMessage = '';
 
   constructor(private boardsService: BoardsService, private router: Router) { }
@@ -24,5 +25,20 @@ export class PostsComponent implements OnInit {
   edit(id: string) {
     this.router.navigate(['post', id]);
   }
+
+  delete(id: string) {
+    this.boardsService.deletePost(id).subscribe(data => console.log(data), error => this.errorMessage = `${error.status}: ${error.message}`);
+    this.reloadPage();
+  }
+
+  view(id: string) {
+    this.router.navigate(['view', id]);
+  }
+
+  reloadPage() {
+    window.location.reload();
+  }
+
+
 
 }

@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const materialModules = [
   MatToolbarModule,
@@ -26,6 +27,7 @@ const materialModules = [
   MatMenuModule,
   MatSelectModule,
   MatListModule,
+  MatAutocompleteModule,
 ]
 
 @NgModule({

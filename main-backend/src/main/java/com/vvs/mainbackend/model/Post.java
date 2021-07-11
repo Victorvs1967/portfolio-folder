@@ -35,4 +35,5 @@ public class Post {
   @Indexed(unique = true)
   @Field("username")
   private String username;
+
 }

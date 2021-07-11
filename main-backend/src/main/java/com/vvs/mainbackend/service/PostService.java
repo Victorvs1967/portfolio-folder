@@ -32,26 +32,28 @@ public class PostService {
 
   @Transactional
   public void createPost(PostDto postDto) {
-    Post post = mapFromDtoToPost(postDto);
-    postRepository.save(post);
+      Post post = mapFromDtoToPost(postDto);
+      postRepository.save(post);
   }
 
   @Transactional
   public PostDto readSinglPost(ObjectId id) {
-    Post post = postRepository.findById(id)
-        .orElseThrow(() -> new PostNotFoundException("Post not found for id: " + id));
+    Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found for id: " + id));
     return mapFromPostToDto(post);
   }
 
   @Transactional
   public void updatePost(PostDto postDto) {
-    Post post = postRepository.findById(postDto.getId()).orElseThrow(() -> new PostNotFoundException("Post not found."));
-    post.setTitle(postDto.getTitle());
-    post.setContent(postDto.getContent());
-    post.setUsername(postDto.getUsername());
-    post.setCreateOn(post.getCreateOn());
-    post.setUpdateOn(Instant.now());
-    postRepository.save(post);
+    Post post = postRepository.findById(postDto.getId()).orElseThrow(() -> new PostNotFoundException("Post not found for id: " + postDto.getId()));    
+    Post newPost = mapFromDtoToPost(postDto);
+    if (post.getCreateOn() != null) newPost.setCreateOn(post.getCreateOn());
+    postRepository.save(newPost);
+  }
+  
+  @Transactional
+  public void deletePost(ObjectId id) {
+    Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found for id: " + id));
+    postRepository.delete(post);
   }
 
   private Post mapFromDtoToPost(PostDto postDto) {

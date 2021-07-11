@@ -36,7 +36,7 @@ $bluegray-palette: (
 );
 
 $my-bluegray-primary: mat.define-palette($bluegray-palette);
-$my-bluegray-accent: mat.define-palette($mat-lime, 100, 500);
+$my-bluegray-accent: mat.define-palette($mat-green, 200, 500);
 $my-bluegray-warn: mat.define-palette($mat-red);
 
 .bluegray-theme-dark {

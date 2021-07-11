@@ -20,6 +20,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { UpdatePostComponent } from './components/update-post/update-post.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { ViewPostComponent } from './components/view-post/view-post.component';
 
 export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initialPage: 'home' };
 
@@ -36,7 +37,8 @@ export const AUTHENTICATION_CONFIG = { authEndpoint: environment.authUrl, initia
     FooterComponent,
     PostsComponent,
     CreatePostComponent,
-    UpdatePostComponent
+    UpdatePostComponent,
+    ViewPostComponent
   ],
   imports: [
     BrowserModule,

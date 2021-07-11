@@ -1,12 +1,6 @@
-<section [class.open]="display === 'open'" (click)="close()">
-  <!-- modal background with mode trigger -->
   <mat-card class="form-container" (click)="$event.stopPropagation()">
-    <!-- material card wrapper with stop event listener -->
-    <button class="close-btn" mat-icon-button (click)="close()">
-      <mat-icon>close</mat-icon>
-    </button> <!-- close modal button -->
     <mat-card-title>Create Post</mat-card-title>
-    <mat-card-content>
+    <mat-card-content class="NgxEditor__Wrapper">
       <form [formGroup]="postForm" (submit)="onSubmit()">
         <div class="form-field">
           <mat-form-field appearance="outline">
@@ -16,17 +10,25 @@
           </mat-form-field>
         </div>
         <div class="form-field">
-          <mat-form-field appearance="outline">
-            <mat-label>Content</mat-label>
-            <textarea matInput rows="4" formControlName="content" placeholder="Content"></textarea>
-          </mat-form-field>
+          <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+          <ngx-editor 
+          formControlName="content" 
+          [editor]="editor" 
+          [editable]="true" 
+          [placeholder]="'Type here...'">
+          </ngx-editor>
         </div>
         <div class="form-field">
           <mat-form-field appearance="outline">
             <mat-label>Author</mat-label>
-            <input *ngIf="authority === 'admin'; else author" matInput type="text" formControlName="username" placeholder="Author"/>
+            <input *ngIf="authority === 'admin'; else author" matInput type="text" formControlName="username" placeholder="Author"  [matAutocomplete]="auto"/>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let user of users" [value]="user.username">
+                {{ user.username }}
+              </mat-option>
+            </mat-autocomplete>
             <ng-template #author>
-              <input matInput disabled value="{{authority}}"/>
+              <input matInput disabled value="{{ authority }}" />
             </ng-template>
           </mat-form-field>
         </div>
@@ -36,4 +38,3 @@
       </form>
     </mat-card-content>
   </mat-card>
-</section>

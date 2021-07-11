@@ -10,11 +10,19 @@ import lombok.Data;
 public class PostDto {
   
   private ObjectId id;
+  private String _id;
   private String content;
   private String title;
   private String username;
   private Instant createOn;
   private Instant updateOn;
-  private String _id = id.toHexString();
+
+  public void set_id() {
+    _id = id.toHexString();
+  }
+
+  public String get_id() {
+    return _id;
+  }
   
 }
