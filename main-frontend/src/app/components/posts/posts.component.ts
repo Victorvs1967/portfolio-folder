@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { toHTML } from 'ngx-editor';
 import { Post } from 'src/app/models/post';
 import { BoardsService } from 'src/app/services/boards.service';
 
@@ -18,7 +19,14 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardsService.getAllPosts()
-      .subscribe(data => this.dataSource = data, error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);
+      .subscribe(data => {
+        data.forEach(post => {
+          post.content = JSON.parse(post.content).content[0].content[0].text;
+          this.dataSource = [post, ...this.dataSource];
+        });
+
+    }, error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);
+    console.log(this.dataSource);
   }
 
   edit(id: string) {
