@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Editor } from 'ngx-editor';
+import { Editor, toHTML } from 'ngx-editor';
 import { PostDto } from 'src/app/models/postDto';
 import { BoardsService } from 'src/app/services/boards.service';
 
@@ -37,7 +37,7 @@ export class UpdatePostComponent implements OnInit {
         this.author = s.username;
         this.form.controls.title.setValue(s.title);
         this.editor.commands
-        .insertText(s.content)
+        .insertHTML(toHTML(JSON.parse(s.content)))
         .focus()
         .scrollIntoView()
         .exec();
@@ -55,7 +55,7 @@ export class UpdatePostComponent implements OnInit {
         id: this.postId,
         _id: this.post_id,
         title: this.form.controls.title.value,
-        content: this.form.controls.editorContent.value.content[0].content[0].text,
+        content: JSON.stringify(this.form.controls.editorContent.value),
         username: this.author
       }
       this.boardsService.updatePost(post).subscribe(data => console.log(data), error => this.errorMessage = `${error.status}: ${error.message}`);

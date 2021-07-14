@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
-import { PostDto } from 'src/app/models/postDto';
 import { BoardsService } from 'src/app/services/boards.service';
 
 @Component({

@@ -6,18 +6,20 @@
       <mat-card-subtitle>Backend&Frontend</mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
+    <mat-card-header class="post-title">
+      <mat-card-title>{{ post.title }}</mat-card-title>
+    </mat-card-header>
     <mat-card-content class="divider">
       <div class="card-content">
         <img mat-card-lg-image class="card-image" src="https://thispersondoesnotexist.com/image" alt="picture">
-        <p class="card-text">
-          {{ post.title | uppercase }}<br><br>
-          {{ post.content }}
-        </p>
+        <p class="card-text" [innerHtml]="post.content"></p>
       </div>
     </mat-card-content>
     <mat-card-footer class="card-footer">
-      <span>Created: {{ post.createOn | date }}    </span>
-      <span>    Last updated: {{ post.updateOn | date }}</span>
+      <div class="date-group">
+        <span>Created: {{ post.createOn | date }}</span>
+        <span>Last updated: {{ post.updateOn | date }}</span>
+      </div>
       <button mat-button>MESSAGE ME</button>
     </mat-card-footer>
   </mat-card>

@@ -26,8 +26,13 @@
 mat-card-content {
   width: 100%;
 }
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .form-title {
-  margin-bottom: 2rem;
+  margin-top: .5em !important;
 }
 .field-wrapper {
   min-width: 90%;
@@ -35,7 +40,7 @@ mat-card-content {
 }
 .buttons-group {
   width: 100%;
-  margin: 1rem 33%;
+  margin: 1rem 43%;
 }
 .sub-button {
   padding: 0 40px;

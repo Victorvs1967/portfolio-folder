@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Editor } from 'ngx-editor';
+import { Editor, toHTML } from 'ngx-editor';
 import { TokenStorageService } from 'src/app/authentication/services/token-storage.service';
 import { PostDto } from 'src/app/models/postDto';
 import { User } from 'src/app/models/user';
@@ -55,7 +55,7 @@ export class CreatePostComponent implements OnInit {
   onSubmit() {
     const post: PostDto = {
       title: this.postForm.controls.title.value,
-      content: this.postForm.controls.content.value.content[0].content[0].text,
+      content: JSON.stringify(this.postForm.controls.content.value),
       username: this.postForm.controls.username.value
     }
     this.boardsService.createPost(post).subscribe(data => console.log(data), error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);

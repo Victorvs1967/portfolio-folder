@@ -1,27 +1,29 @@
-<mat-card>
-  <mat-card-title>Edit Post</mat-card-title>
-  <mat-card-content class="NgxEditor__Wrapper">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-field">
-        <mat-form-field appearance="outline">
-          <mat-label>Title</mat-label>
-          <input matInput type="text" formControlName="title">
-        </mat-form-field>
-      </div>
-      <div class="form-field">
-        <ngx-editor-menu
-        [editor]="editor"
-        ></ngx-editor-menu>
-        <ngx-editor
-          formControlName="editorContent"
+<div class="container">
+  <mat-card>
+    <mat-card-title>Edit Post</mat-card-title>
+    <mat-card-content class="NgxEditor__Wrapper">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" formControlName="title">
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <ngx-editor-menu
           [editor]="editor"
-          [editable]="true"
-          [placeholder]="'Type here...'"
-        ></ngx-editor>
-      </div>
-      <div class="form-field">
-        <button mat-raised-button color="warn" type="submit">Save</button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+          ></ngx-editor-menu>
+          <ngx-editor
+            formControlName="editorContent"
+            [editor]="editor"
+            [editable]="true"
+            [placeholder]="'Type here...'"
+          ></ngx-editor>
+        </div>
+        <div class="form-field">
+          <button mat-raised-button color="warn" type="submit">Save</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

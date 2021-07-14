@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { toDoc, toHTML } from 'ngx-editor';
 import { Post } from 'src/app/models/post';
 import { BoardsService } from 'src/app/services/boards.service';
 
@@ -17,7 +18,10 @@ export class ViewPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(p => this.boardsService.getPost(p.id)
-      .subscribe(post => this.post = post, error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`));
+      .subscribe(post => {
+        this.post = post;
+        this.post.content = toHTML(JSON.parse(post.content));
+      }, error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`));
   }
 
 }

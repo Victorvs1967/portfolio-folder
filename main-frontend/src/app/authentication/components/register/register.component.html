@@ -1,5 +1,6 @@
 <div class="container" [class.open]="display === 'open'" (click)="close()">
   <mat-card class="card-wrapper" (click)="$event.stopPropagation()">
+    <button class="close-btn" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button> <!-- close modal button -->
     <mat-card-title class="form-title">Register Form</mat-card-title>
     <mat-card-content>
       <form [formGroup]="registerForm" (submit)="onSubmit()">
@@ -15,8 +16,8 @@
           <mat-radio-button class="radio-button" value="user">
             User
           </mat-radio-button>
+          <br><br>
         </mat-radio-group>
-        <br><br>
         <!-- full name -->
         <mat-form-field class="field-wrapper">
           <mat-label>Full Name </mat-label>
@@ -60,7 +61,6 @@
         </mat-form-field>
         <div class="buttons-group">
           <button [disabled]="!registerForm.valid" mat-flat-button color="primary" type="submit" class="sub-button">Submit</button>
-          <button mat-raised-button type="button" class="sub-button" color="warn" (click)="close()">Cancel</button>
         </div>
         <ng-template [ngIf]="isSignedUp">
           <span>Form submit succesfully</span>

@@ -5,7 +5,8 @@
     <td mat-cell *matCellDef="let element">
       <span *ngIf="col === 'createOn' || col === 'updateOn'; else data;">{{ element[col] | date: 'longDate' }} {{ element[col] | date: 'mediumTime' }}</span>
       <ng-template #data>
-        <span *ngIf="col !== 'buttons'">{{ element[col] }}</span>        
+        <span *ngIf="col === 'content'" [innerHtml]="element[col].textContent" class="content-cell"></span>        
+        <span *ngIf="col !== 'buttons' && col !== 'content'">{{ element[col] }}</span>        
         <button *ngIf="col === 'buttons'" mat-icon-button color="accent" (click)="view(element._id)"><mat-icon>visibility</mat-icon></button>
         <button *ngIf="col === 'buttons'" mat-icon-button color="primary" (click)="edit(element._id)"><mat-icon>edit</mat-icon></button>
         <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element._id)"><mat-icon>delete</mat-icon></button>
