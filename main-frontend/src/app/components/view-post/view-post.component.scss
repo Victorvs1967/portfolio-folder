@@ -1,5 +1,29 @@
-.container {
-  padding: 4em 2em;
+section {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100vh; 
+  background-color: #2626262f;
+
+  visibility: hidden;
+  opacity: 0;
+
+  &.open {
+    visibility: inherit;
+    opacity: 1;
+  }
+}
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+mat-card {
+  margin: 4em 2em;
+}
+mat-card-content {
+  width: 100%;
 }
 .divider {
   margin-top: 20px;;

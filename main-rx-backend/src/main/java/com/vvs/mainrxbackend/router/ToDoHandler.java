@@ -1,10 +1,11 @@
-package com.vvs.mainrxbackend.config;
+package com.vvs.mainrxbackend.router;
 
 import com.vvs.mainrxbackend.model.ToDo;
 import com.vvs.mainrxbackend.repository.ToDoRepository;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -13,7 +14,6 @@ import lombok.extern.java.Log;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 
@@ -32,7 +32,7 @@ public class ToDoHandler {
     Flux<ToDo> toDos = this.todoRepository.findAll();
     return ServerResponse
             .ok()
-            .contentType(APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(toDos, ToDo.class);
   }
 
@@ -40,8 +40,20 @@ public class ToDoHandler {
     Mono<ToDo> todo = request.bodyToMono(ToDo.class);
     return ServerResponse
             .ok()
-            .contentType(APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(fromPublisher(todo.flatMap(this::save), ToDo.class));
+  }
+
+  public Mono<ServerResponse> updateToDo(ServerRequest request) {
+    Mono<ToDo> todo = request.bodyToMono(ToDo.class);
+    return ServerResponse
+            .log()
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(fromPublisher(
+                  todo
+                  .log().doOnNext(t -> this.todoRepository.findById(t.getId()))
+                  .flatMap(this::save), ToDo.class));
   }
 
   public Mono<ServerResponse> deleteTodo(ServerRequest request) {
@@ -49,7 +61,7 @@ public class ToDoHandler {
     Mono<ToDo> todo = this.todoRepository.findById(id);
     return ServerResponse
             .ok()
-            .contentType(APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .body(fromPublisher(todo.flatMap(this::delete), ToDo.class));
   }
 
@@ -58,7 +70,7 @@ public class ToDoHandler {
     Mono<ServerResponse> notFound = ServerResponse.notFound().build();
     return todo.flatMap(t -> ServerResponse
                               .ok()
-                              .contentType(APPLICATION_JSON)
+                              .contentType(MediaType.APPLICATION_JSON)
                               .body(fromValue(t))
                         )
                 .switchIfEmpty(notFound);

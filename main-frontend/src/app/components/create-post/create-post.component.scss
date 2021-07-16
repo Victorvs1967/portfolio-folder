@@ -14,6 +14,11 @@ section {
     opacity: 1;
   }
 }
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 mat-card-content,
 mat-form-field {
   width: 100%;
@@ -23,11 +28,6 @@ mat-card-title {
 }
 .form-container {
   margin-top: 4em;
-}
-.close-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 .form-field {
   margin: auto;

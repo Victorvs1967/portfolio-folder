@@ -1,6 +1,7 @@
-<div class="container">
-  <mat-card *ngIf="post" class="mat-elevation-z4">
+<section class="container" [class.open]="display === 'open'" (click)="close()">
+  <mat-card *ngIf="post" class="mat-elevation-z4" (click)="$event.stopPropagation()">
     <mat-card-header>
+    <button class="close-btn" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button> <!-- close modal button -->
       <img mat-card-avatar src="https://thispersondoesnotexist.com/image" alt="avatar">
       <mat-card-title>{{ post.username }}</mat-card-title>
       <mat-card-subtitle>Backend&Frontend</mat-card-subtitle>
@@ -23,4 +24,4 @@
       <button mat-button>MESSAGE ME</button>
     </mat-card-footer>
   </mat-card>
-</div>
+</section>

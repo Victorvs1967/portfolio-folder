@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, toHTML } from 'ngx-editor';
 import { PostDto } from 'src/app/models/postDto';
 import { BoardsService } from 'src/app/services/boards.service';
+import { ModalService, ModalState } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-update-post',
@@ -19,13 +20,15 @@ export class UpdatePostComponent implements OnInit {
   post_id?: string;
   author?: string;
   errorMessage: string = '';
+  display: ModalState;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private boardsService: BoardsService) { 
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private boardsService: BoardsService, private modalService: ModalService) { 
     this.editor = new Editor();
     this.form = this.formBuilder.group({
       title: [null, { validators: [Validators.required], updateOn: "change" }],
       editorContent: [null, { validators: [Validators.nullValidator], updateOn: "change" }]
     })
+    this.display = 'open';
   }
 
   ngOnInit(): void {
@@ -65,6 +68,8 @@ export class UpdatePostComponent implements OnInit {
   }
 
   close() {
+    this.display = 'close';
+    this.modalService.close();
     this.form.reset();
     this.router.navigate(['posts']);
   }

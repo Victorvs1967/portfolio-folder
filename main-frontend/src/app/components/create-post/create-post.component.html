@@ -1,4 +1,6 @@
+<section class="container" [class.open]="display === 'open'" (click)="close()">
   <mat-card class="form-container" (click)="$event.stopPropagation()">
+    <button class="close-btn" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button> <!-- close modal button -->
     <mat-card-title>Create Post</mat-card-title>
     <mat-card-content class="NgxEditor__Wrapper">
       <form [formGroup]="postForm" (submit)="onSubmit()">
@@ -38,3 +40,4 @@
       </form>
     </mat-card-content>
   </mat-card>
+</section>

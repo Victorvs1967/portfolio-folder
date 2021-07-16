@@ -67,6 +67,7 @@ export class CreatePostComponent implements OnInit {
     this.display = 'close';
     this.postForm.reset();
     this.modalService.close();
+    this.router.navigate(['posts']);
   }
 
 }
