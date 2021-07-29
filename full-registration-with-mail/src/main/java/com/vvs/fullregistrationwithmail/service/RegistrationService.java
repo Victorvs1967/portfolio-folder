@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 
-@Log
 @Service
 @AllArgsConstructor
 public class RegistrationService {
