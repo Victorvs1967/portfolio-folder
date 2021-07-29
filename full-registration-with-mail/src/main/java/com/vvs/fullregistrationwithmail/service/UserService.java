@@ -34,8 +34,7 @@ public class UserService implements UserDetailsService {
     boolean userExist = userRepository.findByEmail(user.getEmail()).isPresent();
 
     if (userExist) {
-      // heck of attributes are the same and if email not confirmed send confirmation email
-
+      // TODO: check of attributes are the same and if email not confirmed send confirmation email
       throw new IllegalStateException("email already taken");
     }
 
@@ -45,15 +44,16 @@ public class UserService implements UserDetailsService {
 
     String token = UUID.randomUUID().toString();
 
-    ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(20));
+    ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(20), user);
     confirmationTokenService.saveConfirmationToken(confirmationToken);
-
-    // Send email
+    // TODO: Send email
     return token;
   }
 
-  public int enableUser(String email) {
-    return userRepository.enableUser(email);
+  public User enableUser(String email) {
+    User user = userRepository.findByEmail(email).orElseThrow();
+    user.setEnable(true);
+    return userRepository.save(user);
   }
   
 }
