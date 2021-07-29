@@ -22,4 +22,9 @@ export class TodoService {
   update(todo: Todo): Observable<Todo> {
     return this.http.put<Todo>(environment.todoUrl, todo);
   }
+
+  delete(todo: Todo): Observable<Todo> {
+    return this.http.delete<Todo>(environment.todoUrl, {body: todo});
+  }
+
 }

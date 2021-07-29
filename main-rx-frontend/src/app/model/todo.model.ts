@@ -1,6 +1,6 @@
 export class Todo {
 
-  id: any;
+  id?: any;
   description?: string;
   created?: Date;
   modified?: Date;

@@ -14,13 +14,13 @@ public class ToDoRouter {
   
   @Bean
   public RouterFunction<ServerResponse> monoRouterFunction(ToDoHandler todoHandler) {
-    
     return RouterFunctions
-            .route(GET("/todo/{id}").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDo)
-            .andRoute(GET("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDos)
-            .andRoute(POST("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::newToDo)
-            .andRoute(PUT("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::updateToDo)
-            .andRoute(DELETE("/todo/{id}").and(accept(MediaType.APPLICATION_JSON)), todoHandler::deleteTodo);
+      .route(POST("/login").and(accept(MediaType.APPLICATION_JSON)), todoHandler::login)
+      .andRoute(GET("/todo/{id}").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDo)
+      .andRoute(GET("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDos)
+      .andRoute(POST("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::newToDo)
+      .andRoute(PUT("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::updateToDo)
+      .andRoute(DELETE("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::deleteTodo);
   }
 
 }

@@ -2,11 +2,14 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" aria-hidden="true">
 
     <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
-      <th mat-header-cell *matHeaderCellDef scope="col"><span>{{ col | uppercase }}</span></th>
+      <th mat-header-cell *matHeaderCellDef scope="col"><span  *ngIf="col !== 'buttons'">{{ col | uppercase }}</span></th>
       <td mat-cell *matCellDef="let element">
-        <span *ngIf="col !== 'created' && col !== 'modified' && col !== 'completed'; else date">{{ element[col] }}</span>
+        <span *ngIf="col !== 'created' && col !== 'modified' && col !== 'completed' && col !== 'buttons'; else date">{{ element[col] }}</span>
         <span *ngIf="col === 'completed'" style="padding-left: 2em;">
-          <mat-checkbox (change)="onChange(element.id)"></mat-checkbox>
+          <mat-checkbox (change)="onChange(element.id)" [checked]="element[col]"></mat-checkbox>
+        </span>
+        <span>
+          <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element)"><mat-icon>delete</mat-icon></button>
         </span>
         <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] | date }}</span></ng-template>
       </td>

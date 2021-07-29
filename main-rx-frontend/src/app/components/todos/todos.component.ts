@@ -10,7 +10,7 @@ import { TodoService } from 'src/app/service/todo.service';
 export class TodosComponent implements OnInit {
 
   dataSource: Todo[] = [];
-  displayedColumns = ['description', 'created', 'modified', 'completed'];
+  displayedColumns = ['description', 'created', 'modified', 'completed', 'buttons'];
 
   constructor(private todoService: TodoService) { }
 
@@ -19,9 +19,13 @@ export class TodosComponent implements OnInit {
   }
 
   onChange(id: string) {
-    const task = this.dataSource.filter(t => t.id === id)[0];
-    task.completed = !task.completed;
-    this.todoService.update(task).subscribe(t => console.log(t));
+    const task = this.dataSource.filter(t => t.id === id);
+    task[0].completed = !task[0].completed;
+    this.todoService.update(task[0]).subscribe(t => console.log(t));
+  }
+
+  delete(todo: Todo) {
+    this.todoService.delete(todo).subscribe(t => console.log(t));
   }
 
 }

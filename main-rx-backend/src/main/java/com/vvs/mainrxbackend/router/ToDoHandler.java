@@ -1,6 +1,8 @@
 package com.vvs.mainrxbackend.router;
 
+import com.vvs.mainrxbackend.dto.TodoDTO;
 import com.vvs.mainrxbackend.model.ToDo;
+import com.vvs.mainrxbackend.model.User;
 import com.vvs.mainrxbackend.repository.ToDoRepository;
 
 import org.bson.types.ObjectId;
@@ -10,19 +12,26 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import lombok.extern.java.Log;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.web.reactive.function.BodyInserters.fromValue;
-import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
+import java.time.Instant;
 
-@Log
+import static org.springframework.web.reactive.function.BodyInserters.*;
+
 @Component
 public class ToDoHandler {
 
   @Autowired
   private ToDoRepository todoRepository;
+  
+  public Mono<ServerResponse> login(ServerRequest request) {
+    Mono<User> user = request.bodyToMono(User.class);
+    return ServerResponse
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(user, User.class);
+  }
   
   public Mono<ServerResponse> getToDo(ServerRequest request) {
     return findById(request.pathVariable("id"));
@@ -45,20 +54,16 @@ public class ToDoHandler {
   }
 
   public Mono<ServerResponse> updateToDo(ServerRequest request) {
-    Mono<ToDo> todo = request.bodyToMono(ToDo.class);
+    Mono<TodoDTO> todo = request.bodyToMono(TodoDTO.class);
     return ServerResponse
-            .log()
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(fromPublisher(
-                  todo
-                  .log().doOnNext(t -> this.todoRepository.findById(t.getId()))
-                  .flatMap(this::save), ToDo.class));
+            .body(fromPublisher(todo.flatMap(this::update), ToDo.class));
   }
 
   public Mono<ServerResponse> deleteTodo(ServerRequest request) {
-    ObjectId id = new ObjectId(request.pathVariable("id"));
-    Mono<ToDo> todo = this.todoRepository.findById(id);
+    // ObjectId id = new ObjectId(request.pathVariable("id"));
+    Mono<ToDo> todo = request.bodyToMono(ToDo.class);
     return ServerResponse
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
@@ -68,11 +73,12 @@ public class ToDoHandler {
   private Mono<ServerResponse> findById(String id) {
     Mono<ToDo> todo = this.todoRepository.findById(new ObjectId(id));
     Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-    return todo.flatMap(t -> ServerResponse
-                              .ok()
-                              .contentType(MediaType.APPLICATION_JSON)
-                              .body(fromValue(t))
-                        )
+    return todo
+            .flatMap(t -> ServerResponse
+                            .ok()
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(fromValue(t))
+                      )
                 .switchIfEmpty(notFound);
   }
 
@@ -86,12 +92,28 @@ public class ToDoHandler {
     );
   }
 
-  private Mono<ToDo> delete(ToDo todo) {
+  private Mono<ToDo> update(TodoDTO todo) {
+    ToDo updatedTodo = new ToDo();
+    updatedTodo.setId(todo.getId());
+    updatedTodo.setDescription(todo.getDescription());
+    updatedTodo.setCompleted(todo.isCompleted());
+    updatedTodo.setCreated(todo.getCreated());
+    updatedTodo.setModified(Instant.now());
     return Mono.fromSupplier(() -> {
       todoRepository
-        .delete(todo)
-        .subscribe();
-      return todo;
+      .save(updatedTodo)
+      .subscribe();
+      return updatedTodo;
     });
   }
+
+  private Mono<ToDo> delete(ToDo todo) {
+    return Mono.fromSupplier(() -> {
+        todoRepository
+          .delete(todo)
+          .subscribe();
+        return todo;
+      });
+  }
+
 }
