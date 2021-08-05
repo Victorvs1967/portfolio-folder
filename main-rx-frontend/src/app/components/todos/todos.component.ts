@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Todo } from 'src/app/model/todo.model';
+import { TodoDto } from 'src/app/model/todoDto.model';
 import { TodoService } from 'src/app/service/todo.service';
 import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
@@ -31,9 +32,9 @@ export class TodosComponent implements OnInit {
   }
 
   onChange(id: string) {
-    const task = this.dataSource.filter(t => t.id === id);
-    task[0].completed = !task[0].completed;
-    this.todoService.update(task[0]).subscribe(t => Swal.fire(t.completed ? 'Todo completed.' : 'Todo uncompleted'));
+    const todo = this.dataSource.filter(t => t.id === id);
+    todo[0].completed = !todo[0].completed;
+    this.todoService.update(todo[0]).subscribe(t => Swal.fire(t.completed ? 'Todo completed.' : 'Todo uncompleted'));
   }
 
   delete(id: string) {
@@ -41,7 +42,7 @@ export class TodosComponent implements OnInit {
   }
 
   add() {
-    const todo = new Todo();
+    const todo = new TodoDto();
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '50%',
       data: { description: todo.description }
@@ -60,7 +61,7 @@ export class TodosComponent implements OnInit {
     });
   }
 
-  edit(todo: Todo) {
+  edit(todo: TodoDto) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '50%',
       data: { description: todo.description }
@@ -78,7 +79,6 @@ export class TodosComponent implements OnInit {
       }
     });
   }
-
 
   warning(message: string) {
     Swal.fire(message).then(() => window.location.reload());
