@@ -28,7 +28,6 @@ public class ConfirmationTokenService {
     ConfirmationToken confirmationToken = confirmationTokenReposotory.findByToken(token).orElseThrow();
     confirmationToken.setConfirmedAt(LocalDateTime.now());
     return confirmationTokenReposotory.save(confirmationToken);
-    // return confirmationTokenReposotory.updateConfirmedAt(token, LocalDateTime.now());
   }
   
 }

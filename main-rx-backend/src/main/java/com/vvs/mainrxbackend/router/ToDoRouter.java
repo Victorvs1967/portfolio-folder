@@ -20,7 +20,7 @@ public class ToDoRouter {
       .andRoute(GET("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDos)
       .andRoute(POST("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::newToDo)
       .andRoute(PUT("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::updateToDo)
-      .andRoute(DELETE("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::deleteTodo);
+      .andRoute(DELETE("/todo/{id}").and(accept(MediaType.APPLICATION_JSON)), todoHandler::deleteTodo);
   }
 
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Todo } from '../model/todo.model';
 
@@ -15,16 +16,16 @@ export class TodoService {
     return this.http.get<Todo[]>(environment.todoUrl);
   }
   
-  save(id: string): Observable<Todo> {
-    return this.http.post<Todo>(environment.todoUrl, id);
+  save(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(environment.todoUrl, todo);
   }
 
   update(todo: Todo): Observable<Todo> {
     return this.http.put<Todo>(environment.todoUrl, todo);
   }
 
-  delete(todo: Todo): Observable<Todo> {
-    return this.http.delete<Todo>(environment.todoUrl, {body: todo});
+  delete(id: string): Observable<Todo> {
+    return this.http.delete<Todo>(environment.todoUrl + '/' + id);
   }
 
 }

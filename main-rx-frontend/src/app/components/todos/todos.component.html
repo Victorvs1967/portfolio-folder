@@ -1,3 +1,6 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button matTooltip="Add Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="add()"><mat-icon>add</mat-icon></button>
+</mat-toolbar>
 <section class="container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" aria-hidden="true">
 
@@ -9,9 +12,10 @@
           <mat-checkbox (change)="onChange(element.id)" [checked]="element[col]"></mat-checkbox>
         </span>
         <span>
-          <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element)"><mat-icon>delete</mat-icon></button>
+          <button *ngIf="col === 'buttons'" mat-icon-button color="accent" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
+          <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
         </span>
-        <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] | date }}</span></ng-template>
+        <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] | date : 'longDate' }}</span></ng-template>
       </td>
     </ng-container>
 

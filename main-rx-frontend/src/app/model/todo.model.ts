@@ -1,9 +1,9 @@
 export class Todo {
 
-  id?: any;
+  id?: string;
   description?: string;
-  created?: Date;
-  modified?: Date;
+  created?: number;
+  modified?: number;
   completed?: boolean;
 
 }

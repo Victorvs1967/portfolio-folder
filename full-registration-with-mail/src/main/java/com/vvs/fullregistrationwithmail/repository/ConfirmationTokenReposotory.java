@@ -13,4 +13,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface ConfirmationTokenReposotory extends MongoRepository<ConfirmationToken, ObjectId> {
   Optional<ConfirmationToken> findByToken(String token);
+  
 }

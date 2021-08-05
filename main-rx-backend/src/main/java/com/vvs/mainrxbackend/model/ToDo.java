@@ -1,8 +1,6 @@
 package com.vvs.mainrxbackend.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -14,8 +12,7 @@ import java.time.Instant;
 public class ToDo {
 
   @Id
-  @Indexed(unique = true)
-  private ObjectId id;
+  private String id;
   private String description;
   private Instant created;
   private Instant modified;
