@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Todo } from 'src/app/model/todo.model';
-import { TodoDto } from 'src/app/model/todoDto.model';
 import { TodoService } from 'src/app/service/todo.service';
 import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
@@ -24,8 +23,8 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.todoService.getAllTodos().subscribe(data => {
       data.forEach(todo => {
-        todo.created = (todo.created ?? 0) * 1000;
-        todo.modified = (todo.modified ?? 0) * 1000;
+        // todo.created = (todo.created ?? 0) * 1000;
+        // todo.modified = (todo.modified ?? 0) * 1000;
         this.dataSource = [todo, ...this.dataSource];        
       });
     });
@@ -42,7 +41,7 @@ export class TodosComponent implements OnInit {
   }
 
   add() {
-    const todo = new TodoDto();
+    const todo = new Todo();
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '50%',
       data: { description: todo.description }
@@ -61,7 +60,7 @@ export class TodosComponent implements OnInit {
     });
   }
 
-  edit(todo: TodoDto) {
+  edit(todo: Todo) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '50%',
       data: { description: todo.description }

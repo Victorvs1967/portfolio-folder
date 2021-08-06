@@ -1,4 +1,6 @@
 <mat-toolbar color="primary">
+  <span class="brand-logo">Todo application</span>
+  <span class="spacer"></span>
   <button mat-icon-button matTooltip="Add Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="add()"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
 <section class="container">
@@ -15,7 +17,7 @@
           <button *ngIf="col === 'buttons'" mat-icon-button color="accent" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
           <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
         </span>
-        <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] | date : 'longDate' }}</span></ng-template>
+        <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] * 1000 | date : 'longDate' }}</span></ng-template>
       </td>
     </ng-container>
 
