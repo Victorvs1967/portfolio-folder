@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker": "docker build -t main-rx-frontend",
+    "frontend": "docker run -p 4200:80 main--rxfrontend"
   },
   "private": true,
   "dependencies": {
