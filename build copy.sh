@@ -1,4 +1,4 @@
-cd ./main-rx-backend
+cd ./main-backend
 ./mvnw clean
 ./mvnw install
 cd ..
