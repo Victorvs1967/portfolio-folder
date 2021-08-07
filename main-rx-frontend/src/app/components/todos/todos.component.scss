@@ -13,13 +13,54 @@ th {
   font-size: 14px;
   padding: 4px 0;
 }
+
 .tooltip {
   background-color: #f04060;
   font-size: 1rem;
 }
-.brand-logo {
-  margin-left: 1em;
+mat-toolbar {
+  padding: 2em 2em;
 }
 .spacer {
   flex: 1 auto;
+}
+.add-btn {
+  width: 5em;
+  height: 5em;
+  background-color: #d0d0d0;
+  margin-right: 2em;
+}
+.add-btn mat-icon {
+  font-size: 3em;
+  width: 1em;
+  height: 1em;
+  padding-top: .4em;
+}
+.btn-group {
+  display: flex;
+}
+.todo-items {
+  width: 60%;
+  margin: auto;
+  margin-top: 2em;
+  background-color: #a0f0f0;
+  border-radius: 2em;
+  padding: 2em;
+}
+.todo-item {
+  width: 90%;
+  margin: 1em auto;
+  border-radius: 2.2em;
+  display: flex;
+  align-items: center;
+  padding: 1em 2.2em;
+  background-color: #86c6d5 !important;
+}
+.item-text {
+  color: #262626;
+  margin-left: 2em;
+  font-size: 1.2em;
+}
+.chk-btn {
+  border-radius: 2em;
 }

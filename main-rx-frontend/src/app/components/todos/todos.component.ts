@@ -48,9 +48,13 @@ export class TodosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.description = result;
+      console.log(result);
       if (this.description != undefined) {
         if (this.description == '') {
-          Swal.fire('Description cannot be empty..!').then(() => this.add());
+          Swal.fire({
+            text: 'Description cannot be empty..!',
+            background: '#b0b0b0'
+          }).then(() => this.add());
         } else {
           todo.description = this.description;
           this.todoService.save(todo).subscribe(() => window.location.reload());
@@ -70,7 +74,10 @@ export class TodosComponent implements OnInit {
       this.description = result;
       if (this.description != undefined) {
         if (this.description == '') {
-          Swal.fire('Description cannot be empty..!').then(() => this.edit(todo));
+          Swal.fire({
+            text: 'Description cannot be empty..!',
+            background: '#f0f0f0'
+          }).then(() => this.edit(todo));
         } else {
           todo.description = this.description;
           this.todoService.update(todo).subscribe(() => window.location.reload());
