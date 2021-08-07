@@ -14,7 +14,7 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 export class TodosComponent implements OnInit {
 
   dataSource: Todo[] = [];
-  displayedColumns = ['description', 'created', 'modified', 'completed', 'buttons'];
+  displayedColumns = ['completed', 'description', 'created', 'modified', 'buttons'];
 
   description: string = '';
 
@@ -23,8 +23,6 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.todoService.getAllTodos().subscribe(data => {
       data.forEach(todo => {
-        // todo.created = (todo.created ?? 0) * 1000;
-        // todo.modified = (todo.modified ?? 0) * 1000;
         this.dataSource = [todo, ...this.dataSource];        
       });
     });
@@ -44,7 +42,8 @@ export class TodosComponent implements OnInit {
     const todo = new Todo();
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '50%',
-      data: { description: todo.description }
+      panelClass: 'dialog-box',
+      data: { description: this.description }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,6 +62,7 @@ export class TodosComponent implements OnInit {
   edit(todo: Todo) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '50%',
+      panelClass: 'dialog-box',
       data: { description: todo.description }
     });
 

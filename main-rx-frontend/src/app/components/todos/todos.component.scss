@@ -1,17 +1,21 @@
-.container {
-  padding: 2em;
-}
-table {
-  width: 100%;
+.mat-table {
+  width: 90%;
+  margin: auto;
+  margin-top: 2em;
+  border-radius: 2em;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  -khtml-border-radius: 2em;
+  overflow: hidden;
 }
 th {
   background-color: #86c6d5 !important;
   font-size: 14px;
+  padding: 4px 0;
 }
 .tooltip {
   background-color: #f04060;
   font-size: 1rem;
-  padding: 6px;
 }
 .brand-logo {
   margin-left: 1em;

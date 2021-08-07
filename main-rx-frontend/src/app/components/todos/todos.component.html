@@ -3,25 +3,22 @@
   <span class="spacer"></span>
   <button mat-icon-button matTooltip="Add Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="add()"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
-<section class="container">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" aria-hidden="true">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2" aria-hidden="true">
+  <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef scope="col"><span  *ngIf="col !== 'buttons'">{{ col | uppercase }}</span></th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="col !== 'created' && col !== 'modified' && col !== 'completed' && col !== 'buttons'; else date">{{ element[col] }}</span>
+      <span *ngIf="col === 'completed'" style="padding-left: 2em;">
+        <mat-checkbox (change)="onChange(element.id)" [checked]="element[col]"></mat-checkbox>
+      </span>
+      <span>
+        <button *ngIf="col === 'buttons'" mat-icon-button color="accent" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
+        <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
+      </span>
+      <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] * 1000 | date : 'longDate' }}</span></ng-template>
+    </td>
+  </ng-container>
 
-    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
-      <th mat-header-cell *matHeaderCellDef scope="col"><span  *ngIf="col !== 'buttons'">{{ col | uppercase }}</span></th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngIf="col !== 'created' && col !== 'modified' && col !== 'completed' && col !== 'buttons'; else date">{{ element[col] }}</span>
-        <span *ngIf="col === 'completed'" style="padding-left: 2em;">
-          <mat-checkbox (change)="onChange(element.id)" [checked]="element[col]"></mat-checkbox>
-        </span>
-        <span>
-          <button *ngIf="col === 'buttons'" mat-icon-button color="accent" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
-          <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
-        </span>
-        <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] * 1000 | date : 'longDate' }}</span></ng-template>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</section>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
