@@ -1,5 +1,4 @@
 cd ./main-rx-backend
-./mvnw clean
-./mvnw install
+./mvnw clean install
 cd ..
 docker compose up --build -d
