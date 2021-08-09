@@ -9,12 +9,20 @@ import { TodosComponent } from './components/todos/todos.component';
 import { MaterialUiModule } from './modules/material-ui.module';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    LoginComponent,
+    RegisterComponent,
+    LayoutComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

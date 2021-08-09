@@ -1,0 +1,46 @@
+.container {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100vh; 
+  background-color: #2626262f;
+
+  visibility: hidden;
+  opacity: 0;
+
+  &.open {
+    visibility: inherit;
+    opacity: 1;
+  }
+}
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.card-container {
+  width: 50%;
+  margin: auto;
+  margin-top: 8em;
+  padding: 2em;
+}
+mat-card-title {
+  margin: 1em 0;
+}
+.form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-field {
+  width: 100%;
+}
+.btn-group {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -1,0 +1,24 @@
+<div class="container" [class.open]="display === 'open'" (click)="close()">
+  <mat-card class="card-container" (click)="$event.stopPropagation()">
+    <button class="close-btn" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button> <!-- close modal button -->
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form class="form-container" [formGroup]="loginForm" (ngSubmit)="clickLogin()" autocomplete="off">
+        <mat-form-field class="form-field">
+          <mat-label>Login:</mat-label>
+          <input matInput type="text" formControlName="username" placeholder="enter login">
+        <mat-error *ngIf="loginForm.get('username')">Invalid username</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Password:</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="enter password">
+        <mat-error *ngIf="loginForm.get('password')">Invalid password</mat-error>
+        </mat-form-field>
+        <div class="btn-group">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+          <button mat-raised-button color="accent" type="button" (click)="clickRegister()">Register</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

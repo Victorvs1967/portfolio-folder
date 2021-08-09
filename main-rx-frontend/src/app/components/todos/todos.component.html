@@ -1,43 +1,18 @@
-<mat-toolbar color="primary">
-  <span class="brand-logo">Todo application</span>
-  <span class="spacer"></span>
-      <button mat-icon-button matTooltip="Login" matTooltipPosition="after" matTooltipClass="tooltip-options"><mat-icon>login</mat-icon></button>
-</mat-toolbar>
 <div class="todo-container">
-  <div class="todo-items">
-    <span class="btn-group">
+  <mat-card class="todo-items">
+    <mat-card-title class="todos-title">
       <span class="spacer"></span>
-      <button class="add-btn" mat-icon-button color="accent" matTooltip="Add Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="add()"><mat-icon>add</mat-icon></button>
-    </span>
-    <div class="todo-item" *ngFor="let todo of dataSource">
-      <input type="checkbox" color="primary" class="chk-btn" (change)="onChange(todo.id ?? '')" [checked]="todo.completed ?? false" />
-      <span class="item-text">{{ todo.description }}</span>
-      <span class="spacer"></span>
-      <span matTooltip="Todo created" matTooltipPosition="after" matTooltipClass="tooltip-options" class="item-text">{{ (todo.created ?? 0) * 1000 | date }}</span>
-      <span class="btn-group">
-        <button mat-icon-button color="accent" matTooltip="Edit Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="edit(todo)"><mat-icon>edit</mat-icon></button>
-        <button mat-icon-button color="warn" matTooltip="Delete Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="delete(todo.id ?? '')"><mat-icon>delete</mat-icon></button>
-      </span>
-    </div>
+      <button class="add-btn" mat-icon-button color="accent" matTooltip="Add Todo" matTooltipPosition="before" matTooltipClass="tooltip-options" (click)="add()"><mat-icon>add</mat-icon></button>
+    </mat-card-title>
+    <mat-card-content class="todo-item" *ngFor="let todo of dataSource">
+        <input type="checkbox" color="primary" class="btn-check" (change)="onChange(todo.id ?? '')" [checked]="todo.completed ?? false" />
+        <span class="item-text">{{ todo.description }}</span>
+        <span class="spacer"></span>
+        <span matTooltip="Modified: {{ (todo.modified ?? 0) * 1000 | date }}" matTooltipPosition="after" matTooltipClass="tooltip-options" class="item-text">{{ (todo.created ?? 0) * 1000 | date }}</span>
+        <span class="btn-group">
+          <button mat-icon-button color="accent" matTooltip="Edit Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="edit(todo)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" matTooltip="Delete Todo" matTooltipPosition="after" matTooltipClass="tooltip-options" (click)="delete(todo.id ?? '')"><mat-icon>delete</mat-icon></button>
+        </span>
+    </mat-card-content>
+  </mat-card>
   </div>
-</div>
-
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z6" aria-hidden="true">
-  <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
-    <th mat-header-cell *matHeaderCellDef scope="col"><span  *ngIf="col !== 'buttons'">{{ col | uppercase }}</span></th>
-    <td mat-cell *matCellDef="let element">
-      <span *ngIf="col !== 'created' && col !== 'modified' && col !== 'completed' && col !== 'buttons'; else date">{{ element[col] }}</span>
-      <span *ngIf="col === 'completed'" style="padding-left: 2em;">
-        <mat-checkbox (change)="onChange(element.id)" [checked]="element[col]"></mat-checkbox>
-      </span>
-      <span>
-        <button *ngIf="col === 'buttons'" mat-icon-button color="accent" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
-        <button *ngIf="col === 'buttons'" mat-icon-button color="warn" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
-      </span>
-      <ng-template #date><span *ngIf="col !== 'completed'">{{ element[col] * 1000 | date : 'longDate' }}</span></ng-template>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export type ModalState = 'open' | 'close';
 
@@ -21,5 +21,4 @@ export class ModalService {
   close() {
     this.display.next('close');
   }
-
 }
