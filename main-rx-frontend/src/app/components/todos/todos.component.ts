@@ -90,10 +90,4 @@ export class TodosComponent implements OnInit {
     Swal.fire(message).then(() => window.location.reload());
   }
 
-  reload() {
-    this.router.navigate(['']);
-    window.location.reload();
-
-  }
-
 }

@@ -16,6 +16,7 @@ public class ToDoRouter {
   public RouterFunction<ServerResponse> monoRouterFunction(ToDoHandler todoHandler) {
     return RouterFunctions
       .route(POST("/login").and(accept(MediaType.APPLICATION_JSON)), todoHandler::login)
+      .andRoute(POST("/signup").and(accept(MediaType.APPLICATION_JSON)), todoHandler::signup)
       .andRoute(GET("/todo/{id}").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDo)
       .andRoute(GET("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::getToDos)
       .andRoute(POST("/todo").and(accept(MediaType.APPLICATION_JSON)), todoHandler::newToDo)

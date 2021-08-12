@@ -19,6 +19,7 @@ export class ModalService {
   }
 
   close() {
+    window.location.reload();
     this.display.next('close');
   }
 }

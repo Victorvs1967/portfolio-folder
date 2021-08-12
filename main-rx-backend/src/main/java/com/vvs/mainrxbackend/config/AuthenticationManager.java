@@ -1,8 +1,11 @@
 package com.vvs.mainrxbackend.config;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,11 +18,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class AuthenticationManager implements ReactiveAuthenticationManager {
 	
-	private final JwtUtil jwtUtil;
-	
-	public AuthenticationManager(JwtUtil jwtUtil) {
-		this.jwtUtil = jwtUtil;
-	}
+	@Autowired
+	private JwtUtil jwtUtil;
 
 	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {
@@ -36,15 +36,26 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
 		
 		if (username != null && jwtUtil.validateToken(token)) {
 			Claims claims = jwtUtil.getClaimsFromToken(token);
-			List<String> roles = claims.get("role", List.class);
+			
+			List<String> roles = new ArrayList<String>();
+			roles = castList(String.class, claims.get("role", List.class));
+
 			List<SimpleGrantedAuthority> authorities = roles.stream()
-											.map(SimpleGrantedAuthority::new)
-											.collect(Collectors.toList());
+																											.map(SimpleGrantedAuthority::new)
+																											.collect(Collectors.toList());
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
 			return Mono.just(authenticationToken);
 		} else {
 			return Mono.empty();			
 		}		
+	}
+
+	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
+		List<T> r = new ArrayList<T>();
+		for(Object o: c) {
+			r.add(clazz.cast(o));
+		}
+		return r;
 	}
 
 }

@@ -13,6 +13,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { AUTH_INTERCEPTOR_PROVIDER } from './components/auth/interceptors/token.interceptor';
+import { LogoutComponent } from './components/auth/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     LoginComponent,
     RegisterComponent,
     LayoutComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     ReactiveFormsModule,
     MaterialUiModule,
   ],
-  providers: [],
+  providers: [
+    AUTH_INTERCEPTOR_PROVIDER
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 package com.vvs.mainrxbackend.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -13,12 +14,9 @@ import reactor.core.publisher.Mono;
 @Component
 public class SecurityContextRepository implements ServerSecurityContextRepository {
 	
-	private final AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
-	public SecurityContextRepository(AuthenticationManager authenticationManager) {
-		this.authenticationManager = authenticationManager;
-	}
-
 	@Override
 	public Mono<Void> save(ServerWebExchange exchange, SecurityContext context) {
 		throw new IllegalStateException("Save method not supported.");
@@ -27,16 +25,16 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 	@Override
 	public Mono<SecurityContext> load(ServerWebExchange exchange) {
 		String authHeader = exchange.getRequest()
-				.getHeaders()
-				.getFirst(HttpHeaders.AUTHORIZATION);
+																.getHeaders()
+																.getFirst(HttpHeaders.AUTHORIZATION);
 		
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
 			String token = authHeader.substring(7);
 			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(token, token);
 			
 			return authenticationManager
-					.authenticate(auth)
-					.map(SecurityContextImpl::new);
+								.authenticate(auth)
+								.map(SecurityContextImpl::new);
 		}
 		
 		return Mono.empty();

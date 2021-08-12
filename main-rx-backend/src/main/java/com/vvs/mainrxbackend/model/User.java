@@ -10,21 +10,30 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Document("users")
 public class User implements UserDetails {
 	
 	@Id
-	private ObjectId _id;
+	private ObjectId id;
 	private String username;
-	@JsonIgnore
 	private String password;
-	private UserRole role;
+	private UserRole role = UserRole.ROLE_USER;
 	
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	
+	public User(String username, String password, UserRole role) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
