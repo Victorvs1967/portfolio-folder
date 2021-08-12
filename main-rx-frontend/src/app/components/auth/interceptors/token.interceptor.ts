@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const username = this.tokenStorage.getUsername();
     if (username != null && token != null) {
       request = request.clone({ 
-        setHeaders: { 'Authorization': token.substring(7,) } });
+        setHeaders: { 'Authorization': 'Bearer ' + token } });
     }
     return next.handle(request);
   }

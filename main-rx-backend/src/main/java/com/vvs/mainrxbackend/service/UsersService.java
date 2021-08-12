@@ -23,8 +23,7 @@ public class UsersService implements ReactiveUserDetailsService {
 
   @Override
   public Mono<UserDetails> findByUsername(String username) {
-    return userRepository.findByUsername(username)
-                          .cast(UserDetails.class);
+    return userRepository.findByUsername(username).cast(UserDetails.class);
   }
 
   public Mono<UserDetails> registerUser(String username, String password) {
@@ -32,8 +31,8 @@ public class UsersService implements ReactiveUserDetailsService {
     user.setUsername(username);
     user.setPassword(passwordEncoder.encode(password));
     user.setRole(UserRole.ROLE_USER);
-    return userRepository.findByUsername(username).cast(User.class)
-                          .and(userRepository.save(user).cast(User.class))
+    return userRepository.findByUsername(username)
+                          .and(userRepository.save(user))
                           .cast(UserDetails.class);
   }
 

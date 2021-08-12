@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { ModalService, ModalState } from 'src/app/service/modal.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { map } from 'rxjs/operators';
+import { LoginRequestModel } from 'src/app/model/login-request.model';
 
 @Component({
   selector: 'app-login',
@@ -48,9 +49,12 @@ export class LoginComponent implements OnInit {
   }
 
   clickLogin() {
-    const username = this.loginForm.controls.username.value;
-    const password = this.loginForm.controls.password.value;
-    this.authService.login(username, password).subscribe(() => {
+
+    const user: LoginRequestModel = new LoginRequestModel(
+      this.loginForm.controls.username.value,
+      this.loginForm.controls.password.value
+    );
+    this.authService.login(user).subscribe(data => {
       this.isLoggedFalse = false;
       this.isLoggedIn = true;
       this.router.navigate(['todo']);
