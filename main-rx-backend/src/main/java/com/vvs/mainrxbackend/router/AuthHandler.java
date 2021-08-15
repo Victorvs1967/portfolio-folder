@@ -8,15 +8,20 @@ import com.vvs.mainrxbackend.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import lombok.extern.java.Log;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
+import java.security.Principal;
+
+@Log
 @Component
 public class AuthHandler {
 
@@ -39,7 +44,7 @@ public class AuthHandler {
                                         userDetails.getUsername(),
                                         userDetails.getRole().name())
                       : UNAUTHORIZED)
-                  .defaultIfEmpty(UNAUTHORIZED)).log("Login Data");
+                  .defaultIfEmpty(UNAUTHORIZED));
     return ServerResponse
             .ok()
             .contentType(APPLICATION_JSON)
@@ -56,4 +61,14 @@ public class AuthHandler {
             .body(user, User.class);
   }
 
+  public Mono<ServerResponse> getMyself(ServerRequest request) {
+      Mono<?> user = request.bodyToMono(User.class)
+            .flatMap(principal -> usersService.findByUsername(principal.getUsername()).cast(User.class)
+            .map(userDetails -> new User(userDetails.getId(), userDetails.getUsername(), userDetails.getPassword(), userDetails.getRole())));
+      return ServerResponse
+              .ok()
+              .contentType(APPLICATION_JSON)
+              .body(user, User.class);
+
+  }
 }

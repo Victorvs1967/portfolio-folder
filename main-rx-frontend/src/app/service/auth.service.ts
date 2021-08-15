@@ -18,6 +18,8 @@ const httpOptions = {
 })
 export class AuthService {
 
+  user?: User;
+
   constructor(private http: HttpClient, private router: Router, private tokenStorage: TokenStorageService) { }
 
   login(user: LoginRequestModel): Observable<TokenResponse> {
@@ -37,4 +39,7 @@ export class AuthService {
     return this.http.post<User>(environment.authUrl + '/signup', user, httpOptions);
   }
 
+  getMySelf(): Observable<User> {
+    return this.http.get<User>(environment.authUrl, httpOptions);
+  }
 }

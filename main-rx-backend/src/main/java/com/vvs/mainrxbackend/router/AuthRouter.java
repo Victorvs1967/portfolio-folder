@@ -16,6 +16,7 @@ public class AuthRouter {
   public RouterFunction<ServerResponse> authRouterFunction(AuthHandler authHandler) {
     return RouterFunctions
       .route(POST("/login").and(accept(APPLICATION_JSON)), authHandler::login)
-      .andRoute(POST("/signup").and(accept(APPLICATION_JSON)), authHandler::signup);
+      .andRoute(POST("/signup").and(accept(APPLICATION_JSON)), authHandler::signup)
+      .andRoute(GET("/").and(accept(APPLICATION_JSON)), authHandler::getMyself);
   }
 }

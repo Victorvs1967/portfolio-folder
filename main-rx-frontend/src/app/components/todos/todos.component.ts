@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Todo } from 'src/app/model/todo.model';
+import { AuthService } from 'src/app/service/auth.service';
 import { TodoService } from 'src/app/service/todo.service';
 import Swal from 'sweetalert2';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
@@ -14,13 +16,12 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 export class TodosComponent implements OnInit {
 
   dataSource: Todo[] = [];
-  displayedColumns = ['completed', 'description', 'created', 'modified', 'buttons'];
-
   description: string = '';
 
-  constructor(private todoService: TodoService, public dialog: MatDialog, private router: Router) { }
+  constructor(private todoService: TodoService, private authService: AuthService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.getMySelf().pipe(map(data => console.log(data)));
     this.todoService.getAllTodos().subscribe(data => {
       data.forEach(todo => {
         this.dataSource = [todo, ...this.dataSource];        

@@ -2,6 +2,7 @@ package com.vvs.mainrxbackend.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import reactor.core.publisher.Mono;
 
+@Configuration
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class SecurityConfig {
@@ -39,10 +41,10 @@ public class SecurityConfig {
 						.httpBasic().disable()
 						.authenticationManager(authenticationManager)
 						.securityContextRepository(securityContextRepository)
-						.authorizeExchange()
-						.pathMatchers("/todo", "/login", "/signup", "/favicon.icon").permitAll()
+						.authorizeExchange().pathMatchers("/todo", "/login", "/signup", "/favicon.icon").permitAll()
 						.pathMatchers("/").hasAnyRole("USER", "ADMIN")
-						.anyExchange().authenticated().and()
+						.anyExchange()
+						.authenticated().and()
 						.build();
 	}
 }
