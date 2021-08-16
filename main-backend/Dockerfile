@@ -1,5 +1,6 @@
 FROM adoptopenjdk/openjdk11:ubi
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+ADD . /app
+WORKDIR /app
+RUN ./mvnw package -DskipTests
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","target/main-backend-0.0.1-SNAPSHOT.jar"]

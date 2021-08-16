@@ -6,6 +6,7 @@ import { ModalService, ModalState } from 'src/app/service/modal.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { map } from 'rxjs/operators';
 import { LoginRequestModel } from 'src/app/model/login-request.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -49,16 +50,19 @@ export class LoginComponent implements OnInit {
   }
 
   clickLogin() {
-
     const user: LoginRequestModel = new LoginRequestModel(
       this.loginForm.controls.username.value,
       this.loginForm.controls.password.value
     );
     this.authService.login(user).subscribe(data => {
+      if (data.statusCode === 'UNAUTHORIZED') Swal.fire('Username or Password Wrong!').then(() => window.location.reload());
       this.isLoggedFalse = false;
       this.isLoggedIn = true;
       this.router.navigate(['todo']);
-    }, error => this.isLoggedFalse = true);
+    }, error => {
+      console.log(error);
+      this.isLoggedFalse = true;
+    });
   }
 
   clickRegister() {

@@ -1,11 +1,7 @@
 FROM adoptopenjdk/openjdk11:ubi
 
-RUN mkdir /app
+ADD . /app
 WORKDIR /app
-COPY . ./
-RUN ./mvnw clean install
-
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+RUN ./mvnw package -DskipTests
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","target/main-rx-backend-0.0.1-SNAPSHOT.jar"]
