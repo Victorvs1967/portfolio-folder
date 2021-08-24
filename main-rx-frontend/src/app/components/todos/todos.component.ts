@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Todo } from 'src/app/model/todo.model';
@@ -18,10 +17,10 @@ export class TodosComponent implements OnInit {
   dataSource: Todo[] = [];
   description: string = '';
 
-  constructor(private todoService: TodoService, private authService: AuthService, public dialog: MatDialog, private router: Router) { }
+  constructor(private todoService: TodoService, private authService: AuthService, public dialog: MatDialog, private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.authService.getMySelf().pipe(map(data => console.log(data)));
     this.todoService.getAllTodos().subscribe(data => {
       data.forEach(todo => {
         this.dataSource = [todo, ...this.dataSource];        

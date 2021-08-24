@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit {
     this.display = 'close';
     this.loginForm.reset();
     this.modalService.close();
+    location.reload();
     this.router.navigate(['todo']);
   }
 

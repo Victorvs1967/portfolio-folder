@@ -60,7 +60,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 			</dependency>
-
 		<dependency>
 			<groupId>com.github.cloudyrock.mongock</groupId>
 			<artifactId>mongock-bom</artifactId>

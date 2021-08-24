@@ -11,7 +11,7 @@ public class ToDoChangeLog {
   @ChangeSet(order = "001", id = "todoDB", author = "vvs")
   public void todoDB(ToDoRepository toDoRepository) {
     toDoRepository
-      .save(new ToDo("Create Todo Item"))
+      .save(new ToDo("Create Todo Item", "1"))
       .subscribe();
   }
 

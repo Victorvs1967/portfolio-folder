@@ -39,7 +39,4 @@ export class AuthService {
     return this.http.post<User>(environment.authUrl + '/signup', user, httpOptions);
   }
 
-  getMySelf(): Observable<User> {
-    return this.http.get<User>(environment.authUrl, httpOptions);
-  }
 }
