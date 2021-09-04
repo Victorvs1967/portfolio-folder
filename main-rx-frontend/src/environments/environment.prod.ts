@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  authUrl: 'http://backend:8080',
-  todoUrl: 'http://backend:8080/todo'
+  authUrl: 'http://172.31.0.1:8080',
+  todoUrl: 'http://172.31.0.1:8080/todo'
 };
