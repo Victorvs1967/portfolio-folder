@@ -2,10 +2,10 @@ version: "3.3"
 networks:
   frontend:
     external: false
-    name: frontend
+    # name: frontend
   backend:
     external: false
-    name: backend
+    # name: backend
 services:
   mongo_db:
     networks: 
