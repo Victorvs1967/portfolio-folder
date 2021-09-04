@@ -1,11 +1,11 @@
-version: "3"
+version: "3.8"
 networks:
   frontend:
     external: false
-    # name: frontend
+    name: frontend
   backend:
     external: false
-    # name: backend
+    name: backend
 services:
   mongo_db:
     networks: 
@@ -20,7 +20,7 @@ services:
     build: main-rx-backend/
     restart: always
     ports:
-      - 8080
+      - 8080:8080
     depends_on:
       - mongo_db
   node:
