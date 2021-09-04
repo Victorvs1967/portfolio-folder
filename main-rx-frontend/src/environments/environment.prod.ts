@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  authUrl: 'http://api_service_1',
-  todoUrl: 'http://api_service_1/todo'
+  authUrl: 'http://localhost:8080',
+  todoUrl: 'http://localhost:8080/todo'
 };
