@@ -1,7 +1,10 @@
-FROM adoptopenjdk/openjdk11:ubi
+FROM adoptopenjdk/openjdk11:jdk-11.0.5_10-alpine
 
 ADD . /app
 WORKDIR /app
-RUN ./mvnw package -DskipTests
+
+RUN ./mvnw clean package -DskipTests
+RUN mv target/main-rx-backend-*.jar app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","target/main-rx-backend-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

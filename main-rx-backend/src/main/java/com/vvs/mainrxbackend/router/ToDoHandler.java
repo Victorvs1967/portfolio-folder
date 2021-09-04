@@ -60,11 +60,14 @@ public class ToDoHandler {
   }
 
   public Mono<ServerResponse> updateToDo(ServerRequest request) {
-    Mono<ToDo> todo = request.bodyToMono(ToDo.class);
+    String id = request.pathVariable("id");
+    Mono<ToDo> reqTodo = request.bodyToMono(ToDo.class);
+    Mono<ToDo> dbTodo = todoRepository.findById(id);
+    Mono<ToDo> todo = dbTodo.flatMap(td -> reqTodo.doOnSuccess(t -> t.setId(td.getId())));
     return ServerResponse
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(fromPublisher(todo.flatMap(this::update), ToDo.class));
+            .body(todo.flatMap(todoRepository::save), ToDo.class);
   }
 
   public Mono<ServerResponse> deleteTodo(ServerRequest request) {

@@ -20,7 +20,7 @@ export class TodoService {
   }
 
   update(todo: Todo): Observable<Todo> {
-    return this.http.put<Todo>(environment.todoUrl, todo);
+    return this.http.put<Todo>(environment.todoUrl + '/' + todo.id, todo);
   }
 
   delete(id: string): Observable<Todo> {
