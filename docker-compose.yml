@@ -1,7 +1,7 @@
 version: "3.3"
 networks:
-  frontend:
-    external: false
+  # frontend:
+  #   external: false
     # name: frontend
   backend:
     external: false
@@ -20,15 +20,15 @@ services:
     build: main-rx-backend/
     restart: always
     ports:
-      - 8080:8081
+      - 8080:8080
     depends_on:
       - mongo_db
-  node:
-    networks:
-      - frontend
-    build: main-rx-frontend/
-    restart: always
-    ports: 
-      - 4200:80
-    depends_on:
-      - api_service
+  # node:
+  #   networks:
+  #     - frontend
+  #   build: main-rx-frontend/
+  #   restart: always
+  #   ports: 
+  #     - 4200:80
+  #   depends_on:
+  #     - api_service
