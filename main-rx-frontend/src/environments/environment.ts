@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  authUrl: 'http://http://0.0.0.0:8080',
-  todoUrl: 'http://http://0.0.0.0:8080/todo'
+  authUrl: 'http://localhost:8080',
+  todoUrl: 'http://localhost:8080/todo'
 };
 
 /*
