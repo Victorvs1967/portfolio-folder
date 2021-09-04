@@ -10,7 +10,7 @@ services:
   mongo_db:
     networks: 
       - backend
-    image: "mongo:latest"
+    image: "yowoo/my-mongo"
     restart: always
     ports:
       - 27017:27017
