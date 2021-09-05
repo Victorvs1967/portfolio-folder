@@ -20,8 +20,7 @@ services:
     build: main-rx-backend/
     restart: always
     ports:
-      # - 8080:8080
-      - 8080
+      - 8080:8080
     depends_on:
       - mongo_db
   node:
@@ -29,6 +28,7 @@ services:
       - frontend
     build: main-rx-frontend/
     restart: always
+    network_mode: host
     ports: 
       - 4200:80
     depends_on:
