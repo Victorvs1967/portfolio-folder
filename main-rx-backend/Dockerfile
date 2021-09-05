@@ -6,5 +6,5 @@ WORKDIR /app
 RUN ./mvnw clean package -DskipTests
 RUN mv target/main-rx-backend-*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8082
 ENTRYPOINT ["java","-jar","app.jar"]
