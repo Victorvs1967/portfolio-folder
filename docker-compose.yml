@@ -11,23 +11,23 @@ services:
     networks: 
       - backend
     image: "yowoo/my-mongo"
-    restart: always
+    # restart: always
     ports:
       - 27017:27017
   api_service:
     networks:
       - backend
     build: main-rx-backend/
-    restart: always
+    # restart: always
     ports:
-      - 8082:8080
+      - 8080:8080
     depends_on:
       - mongo_db
   node:
     networks:
       - frontend
     build: main-rx-frontend/
-    restart: always
+    # restart: always
     ports: 
       - 4200:80
     depends_on:
