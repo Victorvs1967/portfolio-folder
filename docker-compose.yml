@@ -1,22 +1,22 @@
 version: "3"
-# networks:
-#   frontend:
-#     external: false
-#     # name: frontend
-#   backend:
-#     external: false
-#     # name: backend
+networks:
+  frontend:
+    external: false
+    # name: frontend
+  backend:
+    external: false
+    # name: backend
 services:
   mongo_db:
-    # networks: 
-    #   - backend
+    networks: 
+      - backend
     image: "yowoo/my-mongo"
     restart: always
     ports:
       - 27017:27017
   api_service:
-    # networks:
-    #   - backend
+    networks:
+      - backend
     build: main-rx-backend/
     restart: always
     ports:
@@ -24,11 +24,10 @@ services:
     depends_on:
       - mongo_db
   node:
-    # networks:
-    #   - frontend
+    networks:
+      - frontend
     build: main-rx-frontend/
     restart: always
-    network_mode: host
     ports: 
       - 4200:80
     depends_on:
