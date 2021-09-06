@@ -36,7 +36,7 @@ public class SecurityConfig {
 						.cors().disable()
 						.exceptionHandling()
 						.authenticationEntryPoint((swe, e) -> Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED)))
-						// .accessDeniedHandler((swe, e) -> Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN)))
+						.accessDeniedHandler((swe, e) -> Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN)))
 						.and()
 						.formLogin().disable()
 						.httpBasic().disable()
