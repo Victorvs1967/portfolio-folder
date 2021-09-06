@@ -32,11 +32,11 @@ public class SecurityConfig {
 	@Bean
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 		return http
+						.csrf().disable()
+						.cors().disable()
 						.exceptionHandling()
 						.authenticationEntryPoint((swe, e) -> Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED)))
 						.accessDeniedHandler((swe, e) -> Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))).and()
-						.csrf().disable()
-						.cors().disable()
 						.formLogin().disable()
 						.httpBasic().disable()
 						.authenticationManager(authenticationManager)
