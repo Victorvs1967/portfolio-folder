@@ -10,7 +10,8 @@ import { User } from '../model/user.model';
 import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*' })
 };
 
 @Injectable({
@@ -38,5 +39,5 @@ export class AuthService {
   signup(user: LoginRequestModel): Observable<User> {
     return this.http.post<User>(environment.authUrl + '/signup', user, httpOptions);
   }
-
+  
 }

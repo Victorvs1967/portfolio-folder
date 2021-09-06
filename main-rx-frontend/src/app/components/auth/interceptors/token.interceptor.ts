@@ -21,13 +21,15 @@ export class TokenInterceptor implements HttpInterceptor {
       request = request.clone({ 
         setHeaders: {
           'Authorization': 'Bearer ' + token,
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*'
         }
       });
     } else {
       request = request.clone({
         setHeaders: {
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*'
         }
       });
 
@@ -39,6 +41,5 @@ export class TokenInterceptor implements HttpInterceptor {
 
 export const AUTH_INTERCEPTOR_PROVIDER = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 ];
 
