@@ -10,7 +10,7 @@ import { User } from '../model/user.model';
 import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
 };
 
 @Injectable({
