@@ -24,6 +24,13 @@ export class TokenInterceptor implements HttpInterceptor {
           'Access-Control-Allow-Origin': '*'
         }
       });
+    } else {
+      request = request.clone({
+        setHeaders: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+
     }
     return next.handle(request);
   }
