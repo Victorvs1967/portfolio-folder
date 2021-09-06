@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  authUrl: 'http://host.docker.internal:8080',
-  todoUrl: 'http://host.docker.internal:8080/todo'
+  authUrl: 'http://192.168.32.3:8080',
+  todoUrl: 'http://192.168.32.3:8080/todo'
 };
