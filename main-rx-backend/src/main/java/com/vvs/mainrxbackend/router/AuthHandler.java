@@ -35,9 +35,9 @@ public class AuthHandler {
         .flatMap(credentials -> usersService.findByUsername(credentials.getUsername()).cast(User.class)
                   .map(userDetails -> passwordEncoder.matches(credentials.getPassword(), userDetails.getPassword())
                       ? new JwtResponse(jwtUtil.generateToken(userDetails),
-                                        userDetails.getId(), 
-                                        userDetails.getUsername(),
-                                        userDetails.getRole().name())
+                              userDetails.getId(), 
+                              userDetails.getUsername(),
+                              userDetails.getRole().name())
                       : UNAUTHORIZED)
                   .defaultIfEmpty(UNAUTHORIZED));
     return ServerResponse

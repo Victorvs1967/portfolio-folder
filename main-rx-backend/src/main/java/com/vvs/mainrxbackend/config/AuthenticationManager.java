@@ -42,8 +42,8 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
 			roles = castList(String.class, claims.get("role", List.class));
 
 			List<SimpleGrantedAuthority> authorities = roles.stream()
-																											.map(SimpleGrantedAuthority::new)
-																											.collect(Collectors.toList());
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
 			return Mono.just(authenticationToken);
 		} else {

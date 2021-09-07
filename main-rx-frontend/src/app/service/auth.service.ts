@@ -11,7 +11,10 @@ import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*' })
+    'Content-Type': 'application/json', 
+    'Access-Control-Allow-Origin': '*', 
+    'Access-Control-Allow-Headers': '*' 
+  })
 };
 
 @Injectable({
