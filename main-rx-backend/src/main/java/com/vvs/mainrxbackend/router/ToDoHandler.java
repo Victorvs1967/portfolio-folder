@@ -16,8 +16,6 @@ import lombok.Data;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
-
 import static org.springframework.web.reactive.function.BodyInserters.*;
 
 @Data
@@ -67,7 +65,7 @@ public class ToDoHandler {
     return ServerResponse
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(todo.flatMap(todoRepository::save), ToDo.class);
+            .body(todo.flatMap(this::save), ToDo.class);
   }
 
   public Mono<ServerResponse> deleteTodo(ServerRequest request) {
@@ -92,7 +90,7 @@ public class ToDoHandler {
 
   private Mono<ToDo> save(ToDo todo) {
     return Mono.fromSupplier(() -> {
-        todo.setUserId(this.getId());
+        if (todo.getId() == null) todo.setUserId(this.getId());
         todoRepository
           .save(todo)
           .subscribe();
@@ -109,21 +107,6 @@ public class ToDoHandler {
         return todo;
       }
     );
-  }
-
-  private Mono<ToDo> update(ToDo todo) {
-    ToDo updatedTodo = new ToDo();
-    updatedTodo.setId(todo.getId());
-    updatedTodo.setDescription(todo.getDescription());
-    updatedTodo.setCompleted(todo.isCompleted());
-    updatedTodo.setCreated(todo.getCreated());
-    updatedTodo.setModified(Instant.now());
-    return Mono.fromSupplier(() -> {
-      todoRepository
-        .save(updatedTodo)
-        .subscribe();
-      return updatedTodo;
-    });
   }
 
   private Flux<ToDo> getToDosByUserId(String id) {

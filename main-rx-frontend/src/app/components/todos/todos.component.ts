@@ -23,7 +23,7 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.todoService.getAllTodos().subscribe(data => {
       data.forEach(todo => {
-        this.dataSource = [todo, ...this.dataSource];        
+        this.dataSource = [todo, ...this.dataSource];
       });
     });
   }

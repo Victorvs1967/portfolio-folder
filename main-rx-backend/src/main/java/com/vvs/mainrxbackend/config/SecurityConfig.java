@@ -42,8 +42,8 @@ public class SecurityConfig {
 						.httpBasic().disable()
 						.authenticationManager(authenticationManager)
 						.securityContextRepository(securityContextRepository)
-						.authorizeExchange().pathMatchers("/todo", "/login", "/signup", "/favicon.icon").permitAll()
-						.pathMatchers("/").hasAnyRole("USER", "ADMIN")
+						.authorizeExchange().pathMatchers("/login", "/signup", "/favicon.icon").permitAll()
+						.pathMatchers("/**").hasAnyRole("USER", "ADMIN")
 						.anyExchange()
 						.authenticated().and()
 						.build();
