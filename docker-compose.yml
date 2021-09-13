@@ -14,6 +14,11 @@ services:
     restart: always
     ports:
       - 27017:27017
+    volumes:
+      - mongod:/data
+  volumes:
+    mongod:
+      external: true
   api_service:
     networks:
       - backend
@@ -23,6 +28,8 @@ services:
       - 8080:8080
     depends_on:
       - mongo_db
+    volumes:
+      - mongod:/data    
   node:
     networks:
       - frontend
