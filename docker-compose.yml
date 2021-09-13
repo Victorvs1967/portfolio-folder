@@ -6,6 +6,9 @@ networks:
   backend:
     external: false
     name: backend
+volumes:
+  mongod:
+    external: true
 services:
   mongo_db:
     networks: 
@@ -16,9 +19,6 @@ services:
       - 27017:27017
     volumes:
       - mongod:/data
-  volumes:
-    mongod:
-      external: true
   api_service:
     networks:
       - backend
