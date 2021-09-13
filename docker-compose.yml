@@ -8,8 +8,6 @@ networks:
     name: backend
 volumes:
   data:
-    external: true
-    name: mongod
 services:
   mongo_db:
     networks: 
@@ -19,7 +17,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongod
+      - data:/app
   api_service:
     networks:
       - backend
