@@ -19,7 +19,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongod:/data
+      - mongod
   api_service:
     networks:
       - backend
