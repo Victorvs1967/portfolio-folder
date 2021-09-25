@@ -8,6 +8,7 @@ networks:
     name: backend
 volumes:
   data:
+    - .:/data
 services:
   mongo_db:
     networks: 
@@ -17,7 +18,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - data:/app
+      - data:/data
   api_service:
     networks:
       - backend
@@ -27,6 +28,8 @@ services:
       - 8080:8080
     depends_on:
       - mongo_db
+    volumes:
+      - data:/data
   node:
     networks:
       - frontend
