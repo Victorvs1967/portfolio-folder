@@ -7,7 +7,6 @@ networks:
     external: false
     name: backend
 volumes:
-  data:
     - .:/data
 services:
   mongo_db:
@@ -18,7 +17,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - data:/data
+      - .:/data
   api_service:
     networks:
       - backend
@@ -29,7 +28,7 @@ services:
     depends_on:
       - mongo_db
     volumes:
-      - data:/data
+      - .:/data
   node:
     networks:
       - frontend
