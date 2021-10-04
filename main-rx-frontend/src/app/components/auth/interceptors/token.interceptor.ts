@@ -32,7 +32,6 @@ export class TokenInterceptor implements HttpInterceptor {
           'Access-Control-Allow-Headers': '*'
         }
       });
-
     }
     return next.handle(request);
   }

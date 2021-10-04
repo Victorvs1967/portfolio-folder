@@ -25,6 +25,8 @@ services:
       - 8080:8080
     depends_on:
       - mongo_db
+    volumes:
+      - mongo_store:/home/web/backend
   node:
     networks:
       - frontend
@@ -34,5 +36,7 @@ services:
       - 4200:80
     depends_on:
       - api_service
+    volumes:
+      - mongo_store:/home/web/frontend
 volumes:
   mongo_store:

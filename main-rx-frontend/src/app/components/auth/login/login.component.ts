@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { ModalService, ModalState } from 'src/app/service/modal.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
-import { map } from 'rxjs/operators';
 import { LoginRequestModel } from 'src/app/model/login-request.model';
 import Swal from 'sweetalert2';
 
