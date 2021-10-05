@@ -13,7 +13,7 @@ public class WebConfig implements WebFluxConfigurer {
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
       // .allowedOrigins("http://localhost:4200", "http://localhost:80", "http://localhost:8080")
-      .allowedOrigins("http://www.portfolio-dev.club", "http://www.portfolio-dev.club:4200", "http://185.161.208.235:4200", "http://185.161.208.235:80", "http://185.161.208.235:8080")
+      .allowedOrigins("http://www.portfolio-dev.club", "http://www.portfolio-dev.club:4200", "http://185.161.208.235:4200", "http://185.161.208.235:8080")
       .allowedMethods("*")
       .allowedHeaders("*")
       .allowCredentials(true)
