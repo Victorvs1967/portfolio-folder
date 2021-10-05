@@ -12,7 +12,7 @@ import { TokenStorageService } from './token-storage.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json', 
-    'Access-Control-Allow-Origin': '*', 
+    'Access-Control-Allow-Origin': 'http://www.portfolio-dev.club:4200', 
     'Access-Control-Allow-Headers': '*' 
   })
 };

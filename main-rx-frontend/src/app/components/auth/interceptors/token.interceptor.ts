@@ -21,14 +21,14 @@ export class TokenInterceptor implements HttpInterceptor {
       request = request.clone({ 
         setHeaders: {
           'Authorization': 'Bearer ' + token,
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://www.portfolio-dev.club:4200',
           'Access-Control-Allow-Headers': '*'
         }
       });
     } else {
       request = request.clone({
         setHeaders: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://www.portfolio-dev.club:4200',
           'Access-Control-Allow-Headers': '*'
         }
       });
