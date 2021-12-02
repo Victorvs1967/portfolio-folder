@@ -59,9 +59,9 @@ public class SecurityConfig {
 		CorsConfiguration config = new CorsConfiguration();
 
 		config.setAllowCredentials(true);
-		config.addAllowedOrigin("http://localhost:4200");
-		// config.setAllowedOrigins(Arrays.asList("http://185.161.208.235:4200", "http://185.161.208.235:80", "http://185.161.208.235:8080"));
-		// config.setAllowedOrigins(Arrays.asList("http://www.portfolio-dev.club:4200", "http://www.portfolio-dev.club:8080"));
+		// config.setAllowedOrigins(Arrays.asList("http://185.161.208.235:4200", "http://185.161.208.235:80"));
+		// config.addAllowedOrigin("http://localhost:4200");
+		config.addAllowedOrigin("http://www.portfolio-dev.club:4200");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
 
