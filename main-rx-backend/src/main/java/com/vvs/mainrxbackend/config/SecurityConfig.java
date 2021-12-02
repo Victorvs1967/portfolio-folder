@@ -1,5 +1,7 @@
 package com.vvs.mainrxbackend.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -60,7 +62,7 @@ public class SecurityConfig {
 
 		config.setAllowCredentials(true);
 		// config.addAllowedOrigin("http://localhost:4200");
-		config.addAllowedOrigin("http://www.portfolio-dev.club:4200");
+		config.setAllowedOrigins(Arrays.asList("http://www.portfolio-dev.club:4200", "http://portfolio-dev.club:4200"));
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
 
